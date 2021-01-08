@@ -1,4 +1,4 @@
-# Tufts VizAthon: Disrupting Childhood Obesity
+# Tufts Vizathon: Disrupting Childhood Obesity
 
 Follow progress at: [vizathon.herokuapp.com](http://vizathon.herokuapp.com)
 
