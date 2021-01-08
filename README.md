@@ -1,6 +1,6 @@
 # Tufts VizAthon: Disrupting Childhood Obesity
 
-Follow progress at: vizathon.herokuapp.com
+Follow progress at: [vizathon.herokuapp.com](http://vizathon.herokuapp.com)
 
 #### Goals
     * Interactive web application
@@ -17,5 +17,7 @@ Follow progress at: vizathon.herokuapp.com
 
 
 #### Ideas 
-    * Use income data combined with food environment atlas to examine how far different socionomic groups travel for grocery stores (by county)
-    * Chloropleth map displaying data with a dropdown to choose to display activity levels, diet, weight, and more (by county)
+    * Use income data combined with food environment atlas to examine how far different 
+      socioeconomic groups travel for grocery stores (by county)
+    * Chloropleth map displaying data with a dropdown to choose to display activity 
+      levels, diet, weight, and more (by county)
