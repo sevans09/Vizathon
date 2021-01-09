@@ -21,3 +21,4 @@ Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Viza
       socioeconomic groups travel for grocery stores (by county)
     * Chloropleth map displaying data with a dropdown to choose to display activity 
       levels, diet, weight, and more (by county)
+    * Tracking healthy vs. unhealthy behaviors over several years (using youth risk behavior survey); user could maybe sort by state
