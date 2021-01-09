@@ -1,6 +1,6 @@
 # Tufts Vizathon: Disrupting Childhood Obesity
 
-Follow progress at: [vizathon.herokuapp.com](http://vizathon.herokuapp.com)
+Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Vizathon)
 
 #### Goals
     * Interactive web application
