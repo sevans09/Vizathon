@@ -27,13 +27,11 @@ d3.csv("data/Nutrition__Physical_Activity__and_Obesity_-_Youth_Risk_Behavior_Sur
   
   x.domain(data.map(function(d) { 
     if (d.Topic == "Obesity / Weight Status") {
-        console.log("correct Topic")
         return d['Race/Ethnicity']; }}
     ));
     
   y.domain([0, d3.max(data, function(d) { 
     if (d.Topic == "Obesity / Weight Status") {
-        console.log("correct Topic, in y")
         return d.Data_Value; 
     }})]);
 
@@ -57,18 +55,15 @@ d3.csv("data/Nutrition__Physical_Activity__and_Obesity_-_Youth_Risk_Behavior_Sur
       .style("fill", "steelblue")
       .attr("x", function(d) { 
         if (d.Topic == "Obesity / Weight Status") {
-            console.log("correct Topic")
             return d['Race/Ethnicity']; }}
       )
       .attr("width", x.rangeBand())
       .attr("y", function(d) {     
         if (d.Topic == "Obesity / Weight Status") {
-            console.log("correct Topic, in y")
             return d.Data_Value; 
         }})
       .attr("height", function(d) { 
         if (d.Topic == "Obesity / Weight Status") {
-            console.log("correct Topic, in y")
             return d.Data_Value; 
         }});
 
