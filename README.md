@@ -13,8 +13,8 @@ Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Viza
     from Dataset 2 (fruits and vegetables, TV watching, etc.)
     * Convert Lat/Long to FIPS code to show country when click and census breakdown 
     of county so user has context
-    * If possible, add columns for population and demographic breakdown (maybe income/education levels too)
-    for FIPS
+    * If possible, add columns for population and demographic breakdown 
+    (maybe income/education levels too)for FIPS
 
 #### Goals
     * Interactive web application
@@ -35,4 +35,5 @@ Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Viza
       socioeconomic groups travel for grocery stores (by county)
     * Chloropleth map displaying data with a dropdown to choose to display activity 
       levels, diet, weight, and more (by county)
-    * Tracking healthy vs. unhealthy behaviors over several years (using youth risk behavior survey); user could maybe sort by state
+    * Tracking healthy vs. unhealthy behaviors over several years (using youth risk behavior 
+    survey); user could maybe sort by state
