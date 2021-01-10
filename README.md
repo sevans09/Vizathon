@@ -2,6 +2,20 @@
 
 Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Vizathon)
 
+#### To Do
+    * Data cleaning - drop unnecessary columns, add column with FIPS code
+    * Use data from covid with state (and get county) populations
+    * Click through each year on dataset 3 
+    * On the chloropleth map - make transluscent bubbles (maybe size by # of datapoints)
+    * Color chloropleth map by childhood obesity rate
+    * Include list ordered by ranks in health outcomes
+    * Bar chart when click on point that includes dropdown to sort by different topics 
+    from Dataset 2 (fruits and vegetables, TV watching, etc.)
+    * Convert Lat/Long to FIPS code to show country when click and census breakdown 
+    of county so user has context
+    * If possible, add columns for population and demographic breakdown (maybe income/education levels too)
+    for FIPS
+
 #### Goals
     * Interactive web application
     * Geographic and time-series data
