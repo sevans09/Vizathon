@@ -37,6 +37,8 @@ Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Viza
       levels, diet, weight, and more (by county)
     * Tracking healthy vs. unhealthy behaviors over several years (using youth risk behavior 
     survey); user could maybe sort by state
+    • Visualizing corr between obesity and other variables (income, eudcation, fast food availability, etc.) accross the country by overlaying different colored maps at 50% opacity so they blend
 
 #### Sketches
-    * ![alt text](https://github.com/sevans09/Vizathon/blob/main/Viz%20Sketch1.jpg)
+![alt text](https://github.com/sevans09/Vizathon/blob/main/Viz%20Sketch1.jpg)
+![alt text](https://github.com/sevans09/Vizathon/blob/main/Viz%20Sketch2.jpg)
