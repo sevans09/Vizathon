@@ -39,4 +39,4 @@ Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Viza
     survey); user could maybe sort by state
 
 #### Sketches
-    * ![Screenshot](Viz Sketch1.jpeg)
+    * ![Screenshot](Viz Sketch1.jpg)
