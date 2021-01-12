@@ -12,6 +12,7 @@ function makeMap(us) {
       .enter().append("path")
       .style("opacity", .95)
       .attr("fill", function(d) { 
+        console.log("in fill", d)
         if (move_dict.get(d.id)) {
           return quantize(move_dict.get(d.id)[val-1])
         } else {
@@ -42,7 +43,6 @@ function makeMap(us) {
   
   
   function addDropdown(fips) {
-    console.log("in dropdown", fips)
     $( ".dropbtn" ).show();
     $( ".dropdown" ).show();
     s = "";
