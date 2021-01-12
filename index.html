@@ -16,12 +16,11 @@
       <div class="row">
         <input type="range" min="1" max="9" value="4" class="slider" id="myRange"><div id="week"></div>
       </div>   
-    </div>
-    <div class="row" id="barchartdiv">
-        <div id ="barchart"> </div>
-    </div>   
+    </div> 
     <div id="alertdiv" style="display:none"></div>
   </div>
+</div>
+
   <div class="column1" style="position: sticky; margin-top:10px;">
      <div id= "dem_options" style="position: relative; margin-bottom: -15%; margin-top: 3%; border: 1px #000000 solid; padding: 0px 10px 10px 10px;
              float: left; margin-left: 5%; visibility: hidden">
@@ -37,13 +36,11 @@
             <label class="dem_option" for="politics_check"></label>
         </form>
     </div>
-    <a href="#" id="toggleButton" value="MAP" class="myButton"
-       style="margin-bottom: -5%; position: relative; z-index: 1;
-             float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
+    <a href="#" id="toggleButton" value="MAP" class="myButton" style="display: none; margin-bottom: -5%; position: relative; z-index: 1; float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
     <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
     <div style="margin-top:-10%" id="map-legend"></div>
   </div>
-</div>
+<!-- </div> -->
 <footer>
   <h4 class="title">Made with &#10084; by Sook-Hee Evans, Sejal Dua, and Gerard Fresca</h4>
 </footer>
@@ -133,8 +130,7 @@ var selected_state = null;
 var quantize = d3.scaleQuantize()
       .domain([0, 100])
       .range(d3.range(5).map(function(i) { 
-        console.log("i is", i)
-          if (i == 0)
+        if (i == 0)
               return "#9adbb5";
           else if (i == 1)
               return "rgb(205, 235, 178)";
@@ -144,6 +140,16 @@ var quantize = d3.scaleQuantize()
               return "rgb(253, 223, 158)";
           else
               return "rgb(211, 85, 65)";
+          // if (i == 0)
+          //     return "rgb(255,255,255)";
+          // else if (i == 1)
+          //     return "rgb(255, 229, 125)";
+          // else if (i == 2)
+          //     return "rgb(255, 152, 45";
+          // else if (i == 3)
+          //     return "rgb(252, 108, 45)";
+          // else
+          //     return "rgb(255, 21, 0)";
       }))
 
 var projection = d3.geoAlbersUsa()
