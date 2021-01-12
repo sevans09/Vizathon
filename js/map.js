@@ -12,9 +12,9 @@ function makeMap(us) {
       .enter().append("path")
       .style("opacity", .95)
       .attr("fill", function(d) { 
-        console.log("in fill", d)
         if (move_dict.get(d.id)) {
-          return quantize(move_dict.get(d.id)[val-1])
+          console.log("move dict val", move_dict.get(d.id))
+          return quantize(move_dict.get(d.id))
         } else {
           num_error_counties += 1;
           return;
