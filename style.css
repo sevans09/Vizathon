@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 h1.title {
     margin-bottom: -10px;
     text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
   }
   
   h4.title {
@@ -97,7 +101,7 @@ h1.title {
   }
   
   body {
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     min-width: 900px;
   }
   
