@@ -41,6 +41,7 @@ for year in years:
             orig_df = pd.concat([orig_df, df], ignore_index=True)
 
         orig_df.rename(columns={'% Obese': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate', '% Healthy Food': 'healthy_food_rate'}, inplace=True)
+        # print(list(orig_df['obesity_rate']))
         orig_df.drop_duplicates(subset=['FIPS'], keep='last', inplace=True)
         orig_df.reset_index(drop=True, inplace=True)
 

@@ -13,8 +13,8 @@ function makeMap(us) {
       .style("opacity", .95)
       .attr("fill", function(d) { 
         if (move_dict.get(d.id)) {
-          console.log("move dict val", move_dict.get(d["% Smokers"]))
-          return quantize(move_dict.get(d["% Obese"]))
+          console.log("move dict val", move_dict.get(d.id))
+          return quantize(move_dict.get(d.id))
         } else {
           num_error_counties += 1;
           return;

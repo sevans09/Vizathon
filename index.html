@@ -50,7 +50,8 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/d3-tip.js"></script>
-<script type = "text/javascript" src="jsons/data_2020.json"></script>
+<script type = "text/javascript" src="jsons/data_2011.json"></script>
+<script type = "text/javascript" src="jsons/data_2011.json"></script>
 <script type = "text/javascript" src="move_index.json"></script>
 <script type = "text/javascript" src="us-county-cases.json"></script>
 <script type = "text/javascript" src="trends/income_pos.json"></script>
@@ -85,11 +86,11 @@ var svg = d3.select("#maps")
 d3.select("svg").style("cursor", "crosshair");
 
 var move_dict = d3.map();
-data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) });
+data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) });
 console.log(move_dict);
 
 var county_dict = d3.map();
-data_2020.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
+data_2011.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
 console.log(county_dict);
 
 var states_dict = d3.map();
@@ -98,7 +99,7 @@ var names_dict = {};
 var names_and_county_dict = d3.map();
 
 
-// data_2020.forEach( function(d){ 
+// data_2011.forEach( function(d){ 
 //   county_dict.set( d.fips, d.county);
 //   var countyState = d.county + " " + d.state;
 //   names_and_county_dict[d.fips] = d.county, d.state;
@@ -128,7 +129,7 @@ var selected_fips = null;
 var selected_state = null;
 
 var quantize = d3.scaleQuantize()
-      .domain([0, 100])
+      .domain([0, 50])
       .range(d3.range(5).map(function(i) { 
         if (i == 0)
               return "#9adbb5";
