@@ -1,6 +1,8 @@
 h1.title {
     margin-bottom: -10px;
     text-align: center;
+    font-family: "Ubunto";
+    font-weight: 700;
   }
   
   h4.title {
@@ -97,7 +99,7 @@ h1.title {
   }
   
   body {
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     min-width: 900px;
   }
   
