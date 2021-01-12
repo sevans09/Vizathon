@@ -1,7 +1,4 @@
-@font-face {
-  font-family: Ubuntu;
-  src: url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-}
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 h1.title {
     margin-bottom: -10px;
