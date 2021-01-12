@@ -1,7 +1,7 @@
 
 function makeMap(us) {
     var val = document.getElementById("myRange").value;
-    document.getElementById("week").innerHTML = weeks[val-1];
+    document.getElementById("year").innerHTML = years[val-1];
   
     var num_error_counties = 0;
   
@@ -13,7 +13,6 @@ function makeMap(us) {
       .style("opacity", .95)
       .attr("fill", function(d) { 
         if (move_dict.get(d.id)) {
-          console.log("move dict val", move_dict.get(d.id))
           return quantize(move_dict.get(d.id))
         } else {
           num_error_counties += 1;

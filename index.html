@@ -23,7 +23,7 @@
     <div id="slider_div">
       <h4 id="sliderinfo"></h4>
       <div class="row">
-        <input type="range" min="1" max="9" value="4" class="slider" id="myRange"><div id="week"></div>
+        <input type="range" min="1" max="10" value="8" class="slider" id="myRange"><div id="year"></div>
       </div>   
     </div> 
     <div id="alertdiv" style="display:none"></div>
@@ -49,19 +49,10 @@
     <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
     <div style="margin-top:-10%" id="map-legend"></div>
   </div>
-<<<<<<< HEAD
-</div>
-<div class="row">
-  <footer>
-    <h4 class="title">Made with &#10084; by Sejal Dua, Sook-Hee Evans, Sammy Stolzenbach</h4>
-  </footer>  
-</div>
-=======
 <!-- </div> -->
 <footer>
   <h4 class="title">Made with &#10084; by Sook-Hee Evans, Sejal Dua, and Gerard Frasca</h4>
 </footer>
->>>>>>> 6ac3ec45513c7ccdba6b026da63744c12bb5106d
 
 <script src="js/d3.v4.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
@@ -97,7 +88,7 @@
 <script>
 
 d3.select("#sliderinfo")
-.text("Slide to explore weekly movement changes.")
+.text("Slide to explore obesity changes over the years.")
 
 var margin = {top: 10, left: 10, bottom: 10, right: 10}
   , width = $("body").width() / 1.1
@@ -113,11 +104,9 @@ d3.select("svg").style("cursor", "crosshair");
 
 var move_dict = d3.map();
 data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) });
-console.log(move_dict);
 
 var county_dict = d3.map();
 data_2019.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
-console.log(county_dict);
 
 var states_dict = d3.map();
 var state_names_dict = d3.map();
@@ -125,31 +114,7 @@ var names_dict = {};
 var names_and_county_dict = d3.map();
 
 
-// data_2019.forEach( function(d){ 
-//   county_dict.set( d.fips, d.county);
-//   var countyState = d.county + " " + d.state;
-//   names_and_county_dict[d.fips] = d.county, d.state;
-//   names_dict[d.county] = d.fips;
-//   states_dict.set(d.fips, d.state);
-//   if (state_names_dict[d.state] == undefined)
-//     state_names_dict[d.state] = d.sab;
-// });
-
-// var cases_dict = d3.map();
-// var dates_dict = d3.map();
-// var deaths_dict = d3.map();
-// cases_data.forEach( function(d)
-//   { cases_dict.set( d.fips, d.cases); 
-//     deaths_dict.set(d.fips, d.deaths); 
-//     dates_dict.set(d.fips, d.dates); });
-
-var weeks = ["Week of 2020-03-02", "Week of 2020-03-09", 
-            "Week of 2020-03-16", "Week of 2020-03-23", 
-            "Week of 2020-03-30", "Week of 2020-04-06", 
-            "Week of 2020-04-13", "Week of 2020-04-20", 
-            "Week of 2020-04-27"];
-
-// var years = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
+var years = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
 
 var selected_fips = null;
 var selected_state = null;
@@ -167,16 +132,6 @@ var quantize = d3.scaleQuantize()
               return "rgb(253, 223, 158)";
           else
               return "rgb(211, 85, 65)";
-          // if (i == 0)
-          //     return "rgb(255,255,255)";
-          // else if (i == 1)
-          //     return "rgb(255, 229, 125)";
-          // else if (i == 2)
-          //     return "rgb(255, 152, 45";
-          // else if (i == 3)
-          //     return "rgb(252, 108, 45)";
-          // else
-          //     return "rgb(255, 21, 0)";
       }))
 
 var projection = d3.geoAlbersUsa()
@@ -203,7 +158,7 @@ var tip = d3.tip()
 svg.call(tip)
 
 var ordinal = d3.scaleOrdinal()
-  .domain(["<= 0.8", "0.8", "1.6", "2.4", "3 >="])
+  .domain(["< 10%", "10%", "20%", "30%", "40% >="])
   .range(["rgb(154,219,181)", "rgb(205, 235, 178)", "rgb(246,245,174)", 
           "rgb(253, 223, 158)", "rgb(211, 85, 65)"]);
 
