@@ -14,44 +14,7 @@ function in_move_range(move_index, d, val) {
   
   }
   
-function change_move() {
-    var save_fips = selected_fips;
-    unhighlight();
-  
-    var val = document.getElementById("myRange").value;
-    document.getElementById("week").innerHTML = weeks[val-1];
-    var t = d3.transition()
-        .duration(750);
-  
-    if(document.getElementById("toggleButton").value=="MAP") {
-      svg.selectAll("path")
-        .transition(t)
-          .attr("fill", function(d) {
-  
-            if (move_dict.get(d.id)) {
-              if (!move_dict.get(d.id)[val-1])
-              return quantize(move_dict.get(d.id)[val-1])
-            }
-          });
-    } 
-    else 
-    {
-      var bubbles = d3.select(".bubble_svg")
-      bubbles.selectAll("circle")
-        .attr("move", function(d) {
-          move_dict.get(d.fips)[val-1] });
-    
-      bubbles.selectAll("circle")
-        .transition(t)
-          .style("fill", function(d) { return quantize(move_dict.get(d.fips)[val-1]); });
-    }
-    save_fips = selected_fips;
-    if (selected_fips != null)
-      highlight_single(selected_fips);
-    else if (selected_state != null)
-      makeDonut(toTitleCase(selected_state), 320, 320);
-  }
-  
+
   function highlight_single(county) {
     var val = document.getElementById("myRange").value;
     if(document.getElementById("toggleButton").value=="MAP") {
@@ -142,17 +105,21 @@ function in_move_range(move_index, d, val) {
   function change_move() {
     var save_fips = selected_fips;
     unhighlight();
-  
+
     var val = document.getElementById("myRange").value;
-    document.getElementById("week").innerHTML = years[val-1];
+    document.getElementById("year").innerHTML = years[val-1];
     var t = d3.transition()
         .duration(750);
   
     if(document.getElementById("toggleButton").value=="MAP") {
+      // call ready to create map again, based on slider value
+      d3.queue()
+        .defer(d3.json, "https://raw.githubusercontent.com/sevans09/Vizathon/main/us.json?token=AKKXA7SAJLELQT4KYMOA3B3AA4EAG")
+        .await(ready);
       svg.selectAll("path")
         .transition(t)
           .attr("fill", function(d) {
-  
+
             if (move_dict.get(d.id)) {
               if (!move_dict.get(d.id)[val-1])
               return quantize(move_dict.get(d.id)[val-1])

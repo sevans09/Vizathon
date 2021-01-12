@@ -9,7 +9,14 @@
   with Demographic Trends</h1></br>
 <h4 class="title">XX% of overweight or obese adults were obese as children.</h4> 
 <h4 class="title">Nutrition, Physical Activity, and Obesity - Youth Risk Behavior Surveillance System data can be found <a href="https://chronicdata.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Youth-Risk/vba9-s8jp">here.</a></h4>
-
+<div class="dropdown" style="float:right; display:block">
+  <button class="dropbtn">Contributing Factors &#9660;</button>
+  <div class="dropdown-content">
+  <a href="#">Median Household Income</a>
+  <a href="#">Var 2</a>
+  <a href="#">Var 3</a>
+  </div>
+</div>  
 <div class="row">
   <div class="column2" style="position: relative; max-height:6vw; min-height:30px">
     <div id="slider_div">
@@ -42,17 +49,7 @@
     <div style="margin-top:-10%" id="map-legend"></div>
   </div>
 <!-- </div> -->
-
-<div class="dropdown" style="float:right;">
-  <button class="dropbtn">Contributing Factors &#9660;</button>
-  <div class="dropdown-content">
-  <a href="#">Median Household Income</a>
-  <a href="#">Var 2</a>
-  <a href="#">Var 3</a>
-  </div>
-</div>  
-
-<footer style="min-height: 10%">
+<footer>
   <h4 class="title">Made with &#10084; by Sook-Hee Evans, Sejal Dua, and Gerard Frasca</h4>
 </footer>
 
@@ -90,7 +87,7 @@
 <script>
 
 d3.select("#sliderinfo")
-.text("Slide to explore obesity changes over the years.")
+.text("Slide to explore weekly movement changes.")
 
 var margin = {top: 10, left: 10, bottom: 10, right: 10}
   , width = $("body").width() / 1.1
@@ -104,17 +101,13 @@ var svg = d3.select("#maps")
 
 d3.select("svg").style("cursor", "crosshair");
 
-var move_dict = d3.map();
-data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) });
-
 var county_dict = d3.map();
-data_2019.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
+data_2018.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
 
 var states_dict = d3.map();
 var state_names_dict = d3.map();
 var names_dict = {};
 var names_and_county_dict = d3.map();
-
 
 var years = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
 
@@ -148,7 +141,6 @@ var tip = d3.tip()
   .offset([-5, 0])
   .html(function(d) {
     var dataRow = county_dict.get(d.id)
-    var cases = "---";
     if (dataRow) {
       var val = document.getElementById("myRange").value;
       return "County: " + toTitleCase(county_dict.get(d.id))  + "<br>Obesity Rate: " + move_dict.get(d.id)

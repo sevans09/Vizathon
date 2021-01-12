@@ -23,7 +23,7 @@ function ready(error, us) {
     var dem = $("input[name='dem_radio']:checked").val();
 
     slider.addEventListener('change', function() {
-    change_move();
+        change_move();
     });
 
     window.addEventListener('keypress', function(e) {
