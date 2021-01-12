@@ -8,7 +8,16 @@
 <h1 class="title">COVID-19 Movement & Cases Tracker
   with Demographic Trends</h1></br>
 <h4 class="title">XX% of overweight or obese adults were obese as children.</h4> 
-<h4 class="title">Nutrition, Physical Activity, and Obesity - Youth Risk Behavior Surveillance System data can be found <a href="https://chronicdata.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Youth-Risk/vba9-s8jp">here.</a></h4> 
+<h4 class="title">Nutrition, Physical Activity, and Obesity - Youth Risk Behavior Surveillance System data can be found <a href="https://chronicdata.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Youth-Risk/vba9-s8jp">here.</a></h4>
+// Drop Down
+<div class="dropdown" style="float:right;">
+  <button class="dropbtn">Contributing Factors &#9660;</button>
+  <div class="dropdown-content">
+  <a href="#">Median Household Income</a>
+  <a href="#">Var 2</a>
+  <a href="#">Var 3</a>
+  </div>
+</div>  
 <div class="row">
   <div class="column2" style="position: relative; max-height:6vw; min-height:30px">
     <div id="slider_div">
@@ -40,19 +49,35 @@
     <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
     <div style="margin-top:-10%" id="map-legend"></div>
   </div>
+<<<<<<< HEAD
 </div>
 <div class="row">
   <footer>
     <h4 class="title">Made with &#10084; by Sejal Dua, Sook-Hee Evans, Sammy Stolzenbach</h4>
   </footer>  
 </div>
+=======
+<!-- </div> -->
+<footer>
+  <h4 class="title">Made with &#10084; by Sook-Hee Evans, Sejal Dua, and Gerard Frasca</h4>
+</footer>
+>>>>>>> 6ac3ec45513c7ccdba6b026da63744c12bb5106d
 
 <script src="js/d3.v4.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/d3-tip.js"></script>
-<script type = "text/javascript" src="vizathon_data/data_2020.json"></script>
+<script type = "text/javascript" src="jsons/data_2011.json"></script>
+<script type = "text/javascript" src="jsons/data_2012.json"></script>
+<script type = "text/javascript" src="jsons/data_2013.json"></script>
+<script type = "text/javascript" src="jsons/data_2014.json"></script>
+<script type = "text/javascript" src="jsons/data_2015.json"></script>
+<script type = "text/javascript" src="jsons/data_2016.json"></script>
+<script type = "text/javascript" src="jsons/data_2017.json"></script>
+<script type = "text/javascript" src="jsons/data_2018.json"></script>
+<script type = "text/javascript" src="jsons/data_2019.json"></script>
+<script type = "text/javascript" src="jsons/data_2020.json"></script>
 <script type = "text/javascript" src="move_index.json"></script>
 <script type = "text/javascript" src="us-county-cases.json"></script>
 <script type = "text/javascript" src="trends/income_pos.json"></script>
@@ -87,22 +112,20 @@ var svg = d3.select("#maps")
 d3.select("svg").style("cursor", "crosshair");
 
 var move_dict = d3.map();
-// og_data.forEach( function(d){ move_dict.set( d.fips, d.move_index) });
-for (var prop in data_2020[0]) {
-  move_dict.set( data_2020[0][prop].FIPS, data_2020[0][prop]['% Adults with Obesity'])
-}
+data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) });
+console.log(move_dict);
 
 var county_dict = d3.map();
+data_2019.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
+console.log(county_dict);
+
 var states_dict = d3.map();
 var state_names_dict = d3.map();
 var names_dict = {};
 var names_and_county_dict = d3.map();
 
-for (var prop in data_2020[0]) {
-  county_dict.set( data_2020[0][prop].FIPS, data_2020[0][prop].County)
-}
-console.log("county dict is", county_dict)
-// data_2020.forEach( function(d){ 
+
+// data_2019.forEach( function(d){ 
 //   county_dict.set( d.fips, d.county);
 //   var countyState = d.county + " " + d.state;
 //   names_and_county_dict[d.fips] = d.county, d.state;
@@ -132,7 +155,7 @@ var selected_fips = null;
 var selected_state = null;
 
 var quantize = d3.scaleQuantize()
-      .domain([0, 100])
+      .domain([0, 50])
       .range(d3.range(5).map(function(i) { 
         if (i == 0)
               return "#9adbb5";
