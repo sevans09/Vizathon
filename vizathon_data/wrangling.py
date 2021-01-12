@@ -19,6 +19,12 @@ def prepend_line(file_name, line):
     os.rename(dummy_file, file_name)
 
 
+def convert_fips(x):
+    try:
+        return str(int(x))
+    except:
+        return x
+
 years = [str(num) for num in range(2011, 2021, 1)]
 
 for year in years:
@@ -40,6 +46,8 @@ for year in years:
             df.drop(df.columns.difference(['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '% Children in Poverty', '% Healthy Food']), 1, inplace=True)
             orig_df = pd.concat([orig_df, df], ignore_index=True)
 
+        # post-processing
+        orig_df['FIPS'] = orig_df['FIPS'].apply(lambda x: convert_fips(x))
         orig_df.rename(columns={'% Obese': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate', '% Healthy Food': 'healthy_food_rate'}, inplace=True)
         # print(list(orig_df['obesity_rate']))
         orig_df.drop_duplicates(subset=['FIPS'], keep='last', inplace=True)
