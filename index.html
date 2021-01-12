@@ -1,17 +1,229 @@
 <!DOCTYPE html>
-<hml lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
-  <title>VizAthon: Disrupting Childhood Obesity</title>
-</head>
-<body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-  <script src="app.js"></script>
-  <div> ayyooooo </div>
-  <h1> huller hullorrr </h1>
-  <h2 style="color: pink; font-weight:800"> testing testing 1 2 3 yoryor </h2>
-</body>
-</html>
+<meta charset="utf-8">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+
+
+<title>COVID-19 App</title>
+<h1 class="title">COVID-19 Movement & Cases Tracker
+  with Demographic Trends</h1></br>
+<h4 class="title">Move Index Data: <a href="https://help.cuebiq.com/hc/en-us/articles/360041285051-Reading-Cuebiq-s-COVID-19-Mobility-Insights">Cuebiq Mobility Index Analysis</a> uses phone data to measure the median distance traveled by all devices per county</h4> 
+<h4 class="title">Cases Data: <a href="https://github.com/nytimes/covid-19-data">covid-19-data</a> is a New York Times GitHub repository that is updated each day with new cases and deaths by county</h4> 
+<div class="row">
+  <div class="column2" style="position: relative; max-height:44vw; min-height:200px">
+    <div id="slider_div">
+      <h4 id="sliderinfo"></h4>
+      <div class="row">
+        <input type="range" min="1" max="9" value="4" class="slider" id="myRange"><div id="week"></div>
+      </div>   
+    </div>
+    <h4 id="queryinfo"></h4>
+    <div class="row" id="userbox">
+        <div class="wrap">
+          <div class="search">
+              <input type="text" class="searchTerm" id="queriedCounty" placeholder="Enter a county (e.g. Santa Barbara)">
+              <button type="submit" class="searchButton" onClick=handleQuery()>
+                <i class="fa fa-search"></i>
+              </button>
+          </div>
+        </div>
+        <div class="dropdown" id="dropdown">
+          <button class="dropbtn" id="dropdown">State</button>
+          <div class="dropdown-content">
+          </div>
+        </div>
+     </div>
+     <h4 id="querystateinfo"></h4>
+     <div class="row" id="userbox">
+      <div class="wrap">
+        <div class="search">
+            <input type="text" class="searchTerm" id="queriedState" placeholder="Enter a state (e.g. Massachusetts)">
+            <button type="submit" class="searchButton" onClick=handleStateQuery()>
+              <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="barchartdiv">
+        <div id ="barchart"> </div>
+    </div>   
+    <div id="alertdiv" style="display:none"></div>
+  </div>
+  <div class="column1" style="position: sticky; margin-top:10px;">
+     <div id= "dem_options" style="position: relative; margin-bottom: -15%; margin-top: 3%; border: 1px #000000 solid; padding: 0px 10px 10px 10px;
+             float: left; margin-left: 5%; visibility: hidden">
+          <div id= "option_title"><h3 style="margin-bottom: 5px">Filter by Demographic</h3></div>
+        <form id= "radio_options">
+          <input type="radio" name="dem_radio" value="income" id="income_check" checked>Income
+            <label class="dem_option" for="income_check"></label>
+          <br>
+          <input type="radio" name="dem_radio" value="vote" id="politics_check">Politics
+          <label class="dem_option" for="income_check"></label>
+          <br>
+          <input type="radio" name="dem_radio" value="unemp" id="unemployment_check">Unemployment
+            <label class="dem_option" for="politics_check"></label>
+        </form>
+    </div>
+    <a href="#" id="toggleButton" value="MAP" class="myButton"
+       style="margin-bottom: -5%; position: relative; z-index: 1;
+             float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
+    <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
+    <div style="margin-top:-10%" id="map-legend"></div>
+  </div>
+</div>
+<footer>
+  <h4 class="title">Made with &#10084; by Sejal Dua, Sook-Hee Evans, Sammy Stolzenbach</h4>
+</footer>
+
+<script src="js/d3.v4.min.js"></script>
+<script src="js/topojson.v1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/d3-tip.js"></script>
+<script type = "text/javascript" src="move_index.json"></script>
+<script type = "text/javascript" src="us-county-cases.json"></script>
+<script type = "text/javascript" src="trends/income_pos.json"></script>
+<script type = "text/javascript" src="trends/pos-vote.json"></script>
+<script type = "text/javascript" src="trends/unemployment.json"></script>
+<script type = "text/javascript" src="trends/unemp.json"></script>
+<script type = "text/javascript" src="trends/demographic-data.json"></script>
+<script type = "text/javascript" src="trends/trends.js"></script>
+<script type = "text/javascript" src="donut/donut.js"></script>
+<script type = "text/javascript" src="donut/index.js"></script>
+<script type="text/javascript" src="js/bar.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script type="text/javascript" src="js/movement.js"></script>
+<script type="text/javascript" src="js/query.js"></script>
+<script type="text/javascript" src="js/setup.js"></script>
+<script type = "text/javascript" src="js/d3-legend.min.js"> </script>
+<script type = "text/javascript" src="js/detect_location.js"> </script>
+<script>
+
+d3.select("#sliderinfo")
+.text("Slide to explore weekly movement changes.")
+
+d3.select("#queryinfo")
+.text("Query a county OR state to view number of COVID-19 cases")
+
+var margin = {top: 10, left: 10, bottom: 10, right: 10}
+  , width = $("body").width() / 1.1
+  , width = width - margin.left - margin.right
+  , mapRatio = .5
+  , height = width * mapRatio;
+
+var svg = d3.select("#maps")
+    .style('width', width + 'px')
+    .style('height', height + 'px')
+
+d3.select("svg").style("cursor", "crosshair");
+
+var move_dict = d3.map();
+og_data.forEach( function(d){ move_dict.set( d.fips, d.move_index) });
+
+var county_dict = d3.map();
+var states_dict = d3.map();
+var state_names_dict = d3.map();
+var names_dict = {};
+var names_and_county_dict = d3.map();
+
+og_data.forEach( function(d){ 
+  county_dict.set( d.fips, d.county);
+  var countyState = d.county + " " + d.state;
+  names_and_county_dict[d.fips] = d.county, d.state;
+  names_dict[d.county] = d.fips;
+  states_dict.set(d.fips, d.state);
+  if (state_names_dict[d.state] == undefined)
+    state_names_dict[d.state] = d.sab;
+});
+
+var cases_dict = d3.map();
+var dates_dict = d3.map();
+var deaths_dict = d3.map();
+cases_data.forEach( function(d)
+  { cases_dict.set( d.fips, d.cases); 
+    deaths_dict.set(d.fips, d.deaths); 
+    dates_dict.set(d.fips, d.dates); });
+
+var weeks = ["Week of 2020-03-02", "Week of 2020-03-09", 
+            "Week of 2020-03-16", "Week of 2020-03-23", 
+            "Week of 2020-03-30", "Week of 2020-04-06", 
+            "Week of 2020-04-13", "Week of 2020-04-20", 
+            "Week of 2020-04-27"];
+
+var selected_fips = null;
+var selected_state = null;
+
+var quantize = d3.scaleQuantize()
+      .domain([0, 4])
+      .range(d3.range(5).map(function(i) { 
+          if (i == 0)
+              return "#9adbb5";
+          else if (i == 1)
+              return "rgb(205, 235, 178)";
+          else if (i == 2)
+              return "#F6F5AE";
+          else if (i == 3)
+              return "rgb(253, 223, 158)";
+          else
+              return "rgb(211, 85, 65)";
+      }))
+
+var projection = d3.geoAlbersUsa()
+    .scale(width)
+    .translate([width / 2.4, height / 2]);
+
+var path = d3.geoPath()
+    .projection(projection);
+
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-5, 0])
+  .html(function(d) {
+    // d3.select(".d3-tip").style("background-color", "rgba(214, 213, 213, 0.79)");
+    var dataRow = county_dict.get(d.id)
+    var cases;
+    if (cases_dict.get(d.id))
+      cases = num_with_commas(cases_dict.get(d.id)[cases_dict.get(d.id).length-1]);
+    else
+      cases = "---";
+    if (dataRow) {
+      var val = document.getElementById("myRange").value;
+      return "County: " + toTitleCase(county_dict.get(d.id)) + "<br>State: " 
+        +  toTitleCase(states_dict.get(d.id)) + "<br>Cases: " + cases + "<br>Population: " + num_with_commas(pop_dict.get(d.id)) + "<br>Move Index: " + move_dict.get(d.id)[val-1]
+    } else {
+        county_dict.get(d.id) + ": No data.";
+    }
+  })
+
+svg.call(tip)
+
+var ordinal = d3.scaleOrdinal()
+  .domain(["<= 0.8", "0.8", "1.6", "2.4", "3 >="])
+  .range(["rgb(154,219,181)", "rgb(205, 235, 178)", "rgb(246,245,174)", 
+          "rgb(253, 223, 158)", "rgb(211, 85, 65)"]);
+
+var legend = d3.select("#map-legend").append("svg");
+
+legend.append("g")
+  .attr("class", "legend")
+  .attr("transform", "translate(20,20)");
+
+var move_legend = d3.legendColor()
+  .shapeWidth(50)
+  .orient('horizontal')
+  .scale(ordinal)
+  .title("Move Index");
+
+legend.select(".legend")
+  .call(move_legend)
+
+legend.selectAll("rect")
+  .on("mouseover", highlight_move)
+  .on("mouseout", unhighlight)
+
+d3.queue()
+    .defer(d3.json, "js/us.json")
+    .await(ready);
+
+$("#queriedCounty").on('focus', unhighlight);
+</script>
