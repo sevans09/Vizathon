@@ -118,7 +118,7 @@ var selected_fips = null;
 var selected_state = null;
 
 var quantize = d3.scaleQuantize()
-      .domain([0, 50])
+      .domain([10, 60])
       .range(d3.range(5).map(function(i) { 
         if (i == 0)
               return "#9adbb5";

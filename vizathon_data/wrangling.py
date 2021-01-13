@@ -30,6 +30,8 @@ cols_og = ['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '%
 cols_2020 = ['FIPS', 'County', 'State', '% Adults with Obesity', '% Smokers', '% Unemployed', '% Children in Poverty']
 og_dict = {'% Obese': 'obesity_rate', '% Adults with Obesity': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate'}
 
+max_obesity = 0
+min_obesity = 100
 
 for year in years:
     print("getting", year, "data...")
@@ -52,8 +54,13 @@ for year in years:
             orig_df = pd.concat([orig_df, df], ignore_index=True)
 
         # post-processing
+
         orig_df['FIPS'] = orig_df['FIPS'].apply(lambda x: convert_fips(x))
         orig_df.rename(columns=og_dict, inplace=True)
+        if max(orig_df['obesity_rate']) > max_obesity:
+            max_obesity = max(orig_df['obesity_rate']) 
+        if min(orig_df['obesity_rate']) < min_obesity:
+            min_obesity = min(orig_df['obesity_rate'])
         # print(list(orig_df['obesity_rate']))
         orig_df.drop_duplicates(subset=['FIPS'], keep='last', inplace=True)
         orig_df.reset_index(drop=True, inplace=True)
@@ -64,4 +71,5 @@ for year in years:
         prepend_line("./../jsons/data_" + year + ".json", "data_" + year + " = ")
         # break
     # break
+print(min_obesity, max_obesity)
         
