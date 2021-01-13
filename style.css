@@ -183,7 +183,7 @@ h1.title {
     padding-right: .7vw;
     float: left;
     background-color: white;
-    border: 1px solid #b3b2b2;
+    /*border: 1px solid #b3b2b2;*/
     height:auto;
     
     max-height:70%;
