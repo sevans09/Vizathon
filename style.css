@@ -6,6 +6,13 @@ h1.title {
     text-align: center;
     font-family: 'Cantarell', sans-serif;
   }
+
+h2.title {
+    margin-bottom: -10px;
+    text-align: center;
+    font-family: 'Cantarell', sans-serif;
+    font-size: 30;
+}
   
   h4.title {
     margin: 0;
@@ -183,7 +190,7 @@ h1.title {
     padding-right: .7vw;
     float: left;
     background-color: white;
-    border: 1px solid #b3b2b2;
+    /*border: 1px solid #b3b2b2;*/
     height:auto;
     
     max-height:70%;
