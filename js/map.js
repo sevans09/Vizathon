@@ -125,7 +125,6 @@ function swapMap(us) {
     var val = document.getElementById("myRange").value;
     document.getElementById("year").innerHTML = years[val];
     move_dict = dicts[val];
-    console.log(move_dict);
     var t = d3.transition()
         .duration(750);
   
@@ -135,16 +134,9 @@ function swapMap(us) {
           .attr("fill", function(d) {
             // console.log(d);
             if (move_dict.get(d.id)) {
-              // console.log(move_dict.get(d.id));
               return quantize(move_dict.get(d.id));
             }
           });
-      // var bubbles = d3.select(".bubble_svg")
-      // bubbles.selectAll("circle")
-      //   .attr("move", function(d) {
-      //     move_dict.get(d.fips)[val] });
-    
-      // bubbles.selectAll("circle")
-      //   .transition(t)
-      //     .style("fill", function(d) { return quantize(move_dict.get(d.fips)[val]); });
+      dem = $("input[name='dem_radio']:checked").val();
+      make_bubbles_rep(true, val, dem)
     }

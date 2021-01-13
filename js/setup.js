@@ -35,7 +35,6 @@ function ready(error, us) {
         }
     });
 
-    document.getElementById("toggleButton").value="MAP";
     makeMap(us);
 
     $( "#dem_options" ).show();
@@ -47,8 +46,10 @@ function ready(error, us) {
     make_bubbles_rep(us, val, dem)
 
     $('#radio_options').change(function(){
+        
         dem = $("input[name='dem_radio']:checked").val();
         var val = document.getElementById("myRange").value;
+        make_bubbles_rep(true, val, dem)
         update_demographic(dem, val)
     });
 }

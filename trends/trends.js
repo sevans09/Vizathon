@@ -64,9 +64,6 @@ var quantize = d3.scaleQuantize()
   
 var sab_dict = d3.map();
 
-var county_dict = d3.map();
-data_2018.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
-
 var pop_dict = d3.map()
 dem_data.forEach( function(d){ 
   pop_dict.set( d.fips, d.pop_2019);
@@ -161,7 +158,6 @@ function make_x_axis(dem) {
 }
 
 function update_demographic(dem, val) {
-  console.log(dem);
   var margin = {top: 300, right: 250, bottom: 50, left: 50};
   var t = d3.transition()
         .duration(750);
@@ -208,17 +204,18 @@ function update_demographic(dem, val) {
 }
 
 // to be used with swapmap to replace map with bubbles
-function make_bubbles_rep(us, val, dem) {
-  console.log("making bubbles")
+function make_bubbles_rep(should_clear, val, dem) {
+  if (should_clear == true) {
+    d3.selectAll("circle").remove();
+  }
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
-  d3.select(".bubble_svg").remove();
   var width = $("#bubbles").width() * 3
   var height = $("#bubbles").height() / 1.5
 
   pos = $("#bubbles").position().top;
 
   rad_range = get_rad_range(width)
- 
+
   var x = d3.scaleLinear()
     .domain( [min_max[dem].min, min_max[dem].max] )
     .range( [margin.left, width - margin.right]);
@@ -236,18 +233,13 @@ function make_bubbles_rep(us, val, dem) {
     .attr("class", "bubble_svg")
     .attr("shape-rendering", "geometric-precision");
 
-  $("#bubbles").css("visibility", "visible");
-
 
   var tip = d3.tip()
       .attr('class', 'd3-tip')
       .offset([-5, 0])
       .html(function(d) {
-        return "County: " + toTitleCase(d.county) 
-        + " (" + d.sab + ")<br>Move Index: " + get_move(d)
-        + "<br>Population: " + numberWithCommas(d.pop) 
-        + "<br>" + dem_label[dem] + ": " + get_x_value(dem, d);
-  })
+        return "County: " + toTitleCase(d.county) + " (" + d.sab + ")<br>Obesity Rate: " + d.obesity_rate + "<br>Population: " + numberWithCommas(d.pop) + "<br>Income: $" + numberWithCommas(d.income);
+      })
 
   bubbles.call(tip);
 
@@ -256,16 +248,17 @@ function make_bubbles_rep(us, val, dem) {
   y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
   var move_dict = d3.map();
   var val = document.getElementById("myRange").value;
-  if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+
+  if (val == 0) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 1) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 2) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 3) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 4) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 5) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 6) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 7) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 8) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 9) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
 
   //add education metric
   var nodes = data.map(function(node, index) {

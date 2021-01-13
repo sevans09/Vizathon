@@ -5,7 +5,6 @@ function toTitleCase(str) {
 }
 
 function make_bubbles(val, dem) {
-  console.log("callling make bubbles, not rep")
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
   $("#bubbles").empty()
   var width = $("#bubbles").width() * 3
@@ -40,7 +39,8 @@ function make_bubbles(val, dem) {
 
   // create different move dict depending on the slider val
   move_dict = d3.map();
-  if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+
+  if (val == 1) { console.log("val is 1");data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
   else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
   else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
   else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
@@ -57,11 +57,7 @@ function make_bubbles(val, dem) {
     county_dict.set( d.fips, d.county);
     sab_dict.set(d.fips, d.sab);
   });
-
-  var county_dict = d3.map();
-  data_2018.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
-
-
+  
   var x = d3.scaleLinear()
     .domain( [min_max[dem].min, min_max[dem].max] )
     .range( [margin.left, width - margin.right] );
@@ -75,7 +71,8 @@ function make_bubbles(val, dem) {
 
   var yAxisTitle = bubbles.append("text")
     .attr("class", "axisTitle")
-    .text(dem_title[dem]);
+    .text(dem_title[dem])
+    .style("z-index", 100)
 
   yAxisTitle
     .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
