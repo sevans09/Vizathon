@@ -4,6 +4,7 @@ Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Viza
 
 #### To Do
     * Add data from Dataset 3 to dropdown
+    * Slider does not update bubbles
     * Cite sources used from Covid viz (income, population, etc.)
     * Fix legend domain - need to hard code min/max and fix percents
     * Fix legend domain - hover over and show corresponding counties
