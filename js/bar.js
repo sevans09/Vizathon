@@ -17,7 +17,6 @@ function handleClick(fips) {
 function displayBar(data) {
     selected_state = null;
     selected_fips = data;
-    console.log("selected fips", selected_fips);
     $("#barchart").empty();
       var margin = {top: 30, right: 30, bottom: 50, left: 45};
       width = 250;

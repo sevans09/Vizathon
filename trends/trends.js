@@ -178,8 +178,8 @@ function update_demographic(dem, val) {
       .attr('class', 'd3-tip')
       .offset([-5, 0])
       .html(function(d) {
+        console.log("d is", d)
         return "County: " + toTitleCase(d.county) 
-        + " (" + d.sab + ")<br>Move Index: " + get_move(d)
         + "<br>Obesity Rate: " + numberWithCommas(d.obesity_rate) 
         + "<br>" + dem_label[dem] + ": " + get_x_value(dem, d);
   })
@@ -254,6 +254,18 @@ function make_bubbles_rep(us, val, dem) {
   var y_dict = d3.map();
   y_pos = dem_pos[dem]
   y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
+  var move_dict = d3.map();
+  var val = document.getElementById("myRange").value;
+  if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
 
   //add education metric
   var nodes = data.map(function(node, index) {
@@ -269,7 +281,8 @@ function make_bubbles_rep(us, val, dem) {
         x: x(get_node_x(dem, node)),
         fx: x(get_node_x(dem, node)),
         r: radquantize(node.pop_2019),
-        y: y_dict.get(node.fips)
+        y: y_dict.get(node.fips),
+        obesity_rate: move_dict.get(node.fips)
       };
     });
 
