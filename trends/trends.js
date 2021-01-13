@@ -47,20 +47,20 @@ var quantize = d3.scaleQuantize()
             return "rgb(211, 85, 65)";
     }))
 
-  var move_dict = d3.map();
-  var val = document.getElementById("myRange").value;
-  // create different move dict depending on the slider val
-  move_dict = d3.map();
-  if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // var move_dict = d3.map();
+  // var val = document.getElementById("myRange").value;
+  // // create different move dict depending on the slider val
+  // move_dict = d3.map();
+  // if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
   
 var sab_dict = d3.map();
 
@@ -246,19 +246,19 @@ function make_bubbles_rep(should_clear, val, dem) {
   var y_dict = d3.map();
   y_pos = dem_pos[dem]
   y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
-  var move_dict = d3.map();
-  var val = document.getElementById("myRange").value;
+  // var move_dict = d3.map();
+  // var val = document.getElementById("myRange").value;
 
-  if (val == 0) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 1) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 2) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 3) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 4) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 5) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 6) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 7) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 8) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 9) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // if (val == 0) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 1) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 2) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 3) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 4) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 5) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 6) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 7) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 8) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  // else if (val == 9) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
 
   //add education metric
   var nodes = data.map(function(node, index) {

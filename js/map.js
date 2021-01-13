@@ -55,6 +55,7 @@ function makeMap(us) {
   }
   
   function change_move() {
+    console.log("in change move");
     unhighlight();
 
     var val = document.getElementById("myRange").value;
@@ -70,7 +71,11 @@ function makeMap(us) {
             if (move_dict.get(d.id)) {
               return quantize(move_dict.get(d.id));
             }
-          });
-      dem = $("input[name='dem_radio']:checked").val();
-      make_bubbles_rep(true, val, dem)
+        });
+      var bubbles = d3.select(".bubble_svg")
+      bubbles.selectAll("circle")
+        .transition(t)
+        .style("fill", function(d) { return quantize(move_dict.get(d.fips)); })
+      // dem = $("input[name='dem_radio']:checked").val();
+      // make_bubbles_rep(true, val, dem)
     }
