@@ -8,7 +8,6 @@ function make_bubbles(val, dem) {
 
   var margin = {top: 0, right: 50, bottom: 50, left: 50};
   $("#bubbles").empty()
-  console.log("hello")
   var width = $("#bubbles").width()
   var height = $("#bubbles").height()
 
@@ -18,7 +17,7 @@ function make_bubbles(val, dem) {
   var min_pop = 169;
 
   var min_max = {
-    "income": {'min': min_income, 'max': max_income]},
+    "income": {'min': min_income, 'max': max_income},
     "pop"   : {'min': min_pop, 'max': max_pop}
   }
 
@@ -37,7 +36,19 @@ function make_bubbles(val, dem) {
   }
 
   var move_dict = d3.map();
-  og_data.forEach( function(d){ move_dict.set( d.fips, d.move_index) });
+  var val = document.getElementById("myRange").value;
+  // create different move dict depending on the slider val
+  move_dict = d3.map();
+  if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
 
   var county_dict = d3.map();
   var sab_dict = d3.map();
@@ -45,6 +56,10 @@ function make_bubbles(val, dem) {
     county_dict.set( d.fips, d.county);
     sab_dict.set(d.fips, d.sab);
   });
+
+  var county_dict = d3.map();
+  data_2018.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
+
 
   var x = d3.scaleLinear()
     .domain( [min_max[dem].min, min_max[dem].max] )
@@ -60,7 +75,7 @@ function make_bubbles(val, dem) {
       .attr('class', 'd3-tip')
       .offset([-5, 0])
       .html(function(d) {
-        return "County: " + toTitleCase(d.county) + " (" + d.sab + ")<br>Move Index: " + d.move + "<br>Population: " + numberWithCommas(d.pop) + "<br>Income: $" + numberWithCommas(d.income);
+        return "County: " + toTitleCase(d.county) + " (" + d.sab + ")<br>Obesity Rate: " + d.obesity_rate + "<br>Population: " + numberWithCommas(d.pop) + "<br>Income: $" + numberWithCommas(d.income);
       })
 
  

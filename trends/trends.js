@@ -47,15 +47,25 @@ var quantize = d3.scaleQuantize()
             return "rgb(211, 85, 65)";
     }))
 
-var move_dict = d3.map();
-og_data.forEach( function(d){ move_dict.set( d.fips, d.move_index) });
+  var move_dict = d3.map();
+  var val = document.getElementById("myRange").value;
+  // create different move dict depending on the slider val
+  move_dict = d3.map();
+  if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  
+var sab_dict = d3.map();
 
 var county_dict = d3.map();
-var sab_dict = d3.map();
-og_data.forEach( function(d){ 
-  county_dict.set( d.fips, d.county);
-  sab_dict.set(d.fips, d.sab);
-});
+data_2018.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
 
 var pop_dict = d3.map()
 dem_data.forEach( function(d){ 
@@ -170,7 +180,7 @@ function update_demographic(dem, val) {
       .html(function(d) {
         return "County: " + toTitleCase(d.county) 
         + " (" + d.sab + ")<br>Move Index: " + get_move(d)
-        + "<br>Population: " + numberWithCommas(d.pop) 
+        + "<br>Obesity Rate: " + numberWithCommas(d.obesity_rate) 
         + "<br>" + dem_label[dem] + ": " + get_x_value(dem, d);
   })
 
@@ -263,16 +273,10 @@ function make_bubbles_rep(us, val, dem) {
       };
     });
 
-    // var simulation = d3.forceSimulation(nodes)
-    //   .force("x", d3.forceX(function(d) { return d.x; }).strength(1))
-    //   .force("collide", d3.forceCollide().radius(function(d){ return d.r}))
-    //   .force("manyBody", d3.forceManyBody().strength(-1))
-    //   .tick();
-
-    var circle = bubbles.selectAll("circle")
+    bubbles.selectAll("circle")
       .data(nodes)
       .enter().append("circle")
-      .style("fill", function(d) { return quantize(move_dict.get(d.fips)[val-1]); })
+      .style("fill", function(d) { return quantize(move_dict.get(d.fips)); })
       .attr("cx", function(d) { return x(get_d_x(dem, d))} )
       .attr("cy", function(d) { return y_dict.get(d.fips)} )
       .attr("r", function(d) { return d.r} )
