@@ -28,6 +28,9 @@ Follow progress at: [sevans09.github.io/Vizathon](http://sevans09.github.io/Viza
     * Tracking healthy vs. unhealthy behaviors over several years (using youth risk behavior 
     survey); user could maybe sort by state
     • Visualizing corr between obesity and other variables (income, eudcation, fast food availability, etc.) accross the country by overlaying different colored maps at 50% opacity so they blend
+   
+#### Sources
+   * https://www.tutorialsteacher.com/d3js/axes-in-d3
 
 #### Sketches
 ![alt text](https://github.com/sevans09/Vizathon/blob/main/sketches/Viz%20Sketch1.jpg)
