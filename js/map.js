@@ -35,6 +35,8 @@ function makeMap(us) {
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide)
         .on("click", function(d) {handleClick(d.id)});
+
+    console.log(num_error_counties);
   
     window.onclick = function(event) {
       if (event.target.id === "maps")
@@ -47,74 +49,6 @@ function makeMap(us) {
         .attr("class", "states")
         .attr("d", path);
   
-    if (selected_fips != null)
-      highlight_single(selected_fips);
-  }
-  
-  function addDropdown(fips) {
-    $( ".dropbtn" ).show();
-    $( ".dropdown" ).show();
-    s = "";
-    var valid = new Array();
-    for (i = 0; i < fips.length; i++) {
-      if (cases_dict.get(fips[i])) {
-        s += "<a href='#' id='county" + i + "'></a>";
-        valid.push(i);
-      }
-    }
-    console.log(valid.length + "valid fipses");
-    document.getElementsByClassName("dropdown-content")[0].innerHTML = s;
-    var curr_fips, curr_state;
-    for (i = 0; i < valid.length; i++) {
-      curr_fips = fips[valid[i]];
-      curr_state = states_dict.get(curr_fips);
-      $("#county" + valid[i]).html(curr_state);
-    }
-  
-    $(document).ready(function() {
-      $("a").click(function(event) {
-        $( ".dropdown" ).hide();
-        targ = event.target.id;
-        console.log(fips[targ.slice(6)]);
-        fips_q = fips[targ.slice(6)];
-        highlight_single(fips_q);
-        displayBar(fips_q);
-      })
-    })
-  }
-
-  
-function swapMap(us) {
-    var save_fips = selected_fips;
-    unhighlight();
-    // bubbles are hidden, toggle to bubbles
-    if(document.getElementById("toggleButton").value=="MAP"){
-      document.getElementById("toggleButton").innerHTML = "Back to the map";
-      document.getElementById("toggleButton").value="BUBBLE";
-      $( "#dem_options" ).show();
-      $("#bubbles").css("visibility", "visible"); 
-      $("#dem_options").css("visibility", "visible")
-      $("#maps").css("visibility", "hidden");
-      $("#maps").empty();
-  
-      var val = document.getElementById("myRange").value;
-      dem = $("input[name='dem_radio']:checked").val();
-      make_bubbles_rep(us, val, dem)
-      if (selected_fips != null)
-        highlight_single(selected_fips);
-    } 
-    // map is hidden, toggle to map
-    else {
-      document.getElementById("toggleButton").value="MAP";
-      $( "#dem_options" ).hide();
-      document.getElementById("toggleButton").innerHTML = "Switch to Demographic Trends";
-      $("#bubbles").css("visibility", "hidden"); 
-      $("#maps").css("visibility", "visible");
-      $("#maps").empty();
-      $("#dem_options").css("visibility", "hidden")
-      makeMap(us);
-    }
-    selected_fips = save_fips;
     if (selected_fips != null)
       highlight_single(selected_fips);
   }

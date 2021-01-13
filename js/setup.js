@@ -51,7 +51,7 @@ function ready(error, us) {
         
         dem = $("input[name='dem_radio']:checked").val();
         var val = document.getElementById("myRange").value;
-        make_bubbles_rep(true, val, dem)
+        // make_bubbles_rep(true, val, dem)
         update_demographic(dem, val)
     });
 }
