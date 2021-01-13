@@ -143,8 +143,9 @@ h1.title {
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none; 
     appearance: none;
-    width: 25px; 
-    height: 25px; 
+    width: 20px; 
+    height: 20px; 
+    border-radius: 10px;
     background: #565656;
     cursor: pointer;
   }
