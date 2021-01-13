@@ -6,11 +6,11 @@ function toTitleCase(str) {
 
 function make_bubbles(val, dem) {
 
-  var margin = {top: 0, right: 50, bottom: 50, left: 50},
-  $("#bubblediv").empty()
+  var margin = {top: 0, right: 50, bottom: 50, left: 50};
+  $("#bubbles").empty()
   console.log("hello")
-  var width = $("#bubblediv").width()
-  var height = $("#bubblediv").height()
+  var width = $("#bubbles").width()
+  var height = $("#bubbles").height()
 
   var max_income = 123000;
   var min_income = 23000;
@@ -67,7 +67,7 @@ function make_bubbles(val, dem) {
   d3.json("./bubble/dem-data.json", function(error, data) {
     if (error) throw error;
 
- var bubbles = d3.select("#bubblediv").append("svg")
+ var bubbles = d3.select("#bubbles").append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("shape-rendering", "geometric-precision");

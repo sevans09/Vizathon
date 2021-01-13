@@ -1,37 +1,43 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="style.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 
 
-<title>Disrupting Childhood Obesity</title>
-<h1 class="title">Visualizing the Relationship between Obesity and Contributing Factors</h1></br>
-<h4 class="title">XX% of overweight or obese adults were obese as children.</h4> 
-<h4 class="title">Nutrition, Physical Activity, and Obesity - Youth Risk Behavior Surveillance System data can be found <a href="https://chronicdata.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Youth-Risk/vba9-s8jp">here.</a></h4>
-<div class="dropdown" style="float:right; display:block">
-  <button class="dropbtn">Contributing Factors &#9660;</button>
-  <div class="dropdown-content">
-  <a href="#">Median Household Income</a>
-  <a href="#">Var 2</a>
-  <a href="#">Var 3</a>
+  <title>Disrupting Childhood Obesity</title>
+  <h1 class="title">Visualizing the Relationship between Obesity and Contributing Factors</h1></br>
+  <h4 class="title">XX% of overweight or obese adults were obese as children.</h4> 
+  <h4 class="title">Nutrition, Physical Activity, and Obesity - Youth Risk Behavior Surveillance System data can be found <a href="https://chronicdata.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Youth-Risk/vba9-s8jp">here.</a></h4>
+  <div class="dropdown" style="float:right">
+    <button class="dropbtn">Contributing Factors &#9660;</button>
+    <div class="dropdown-content">
+    <a href="#">Median Household Income</a>
+    <a href="#">Var 2</a>
+    <a href="#">Var 3</a>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="column2" style="position: relative; max-height:6vw; min-height:30px">
+      <div id="slider_div">
+        <h4 id="sliderinfo"></h4>
+        <div class="row">
+          <input type="range" min="1" max="10" value="8" class="slider" id="myRange"><div id="year"></div>
+        </div>   
+      </div> 
+      <div id="alertdiv" style="display:none"></div>
+    </div>
   </div>
-</div>  
-<div class="row">
-  <div class="column2" style="position: relative; max-height:6vw; min-height:30px">
-    <div id="slider_div">
-      <h4 id="sliderinfo"></h4>
-      <div class="row">
-        <input type="range" min="1" max="10" value="8" class="slider" id="myRange"><div id="year"></div>
-      </div>   
-    </div> 
-    <div id="alertdiv" style="display:none"></div>
+  <div class="row">
+      <div class="column1" style="position: sticky; margin-top:10px;">
+        <a href="#" id="toggleButton" value="MAP" class="myButton" style="display: none; margin-bottom: -5%; position: relative; z-index: 1; float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
+        <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
+        <div style="margin-top:-10%" id="map-legend"></div>
+      </div>
+    </div>
   </div>
-</div>
-
-  <div class="column1" style="position: sticky; margin-top:10px;">
-     <div id= "dem_options" style="position: relative; margin-bottom: -15%; margin-top: 3%; border: 1px #000000 solid; padding: 0px 10px 10px 10px;
-             float: left; margin-left: 5%; visibility: hidden">
-          <div id= "option_title"><h3 style="margin-bottom: 5px">Filter by Demographic</h3></div>
+  <div class="row">
+    <div id= "dem_options" style="position: relative; margin-bottom: -15%; margin-top: 3%; border: 1px #000000 solid; padding: 0px 10px 10px 10px;float: left; margin-left: 5%; visibility: hidden">
+      <div id= "option_title"><h3 style="margin-bottom: 5px">Filter by Demographic</h3></div>
         <form id= "radio_options">
           <input type="radio" name="dem_radio" value="income" id="income_check" checked>Income
             <label class="dem_option" for="income_check"></label>
@@ -40,14 +46,12 @@
           <label class="dem_option" for="income_check"></label>
           <br>
           <input type="radio" name="dem_radio" value="unemp" id="unemployment_check">Unemployment
-            <label class="dem_option" for="politics_check"></label>
-        </form>
+          <label class="dem_option" for="politics_check"></label>
+      </form>
     </div>
-    <a href="#" id="toggleButton" value="MAP" class="myButton" style="display: none; margin-bottom: -5%; position: relative; z-index: 1; float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
-    <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
-    <div style="margin-top:-10%" id="map-legend"></div>
+    <svg id="bubbles" style="max-height:100%; min-height:200px; width:100%"></svg>
   </div>
-<!-- </div> -->
+
 <footer>
   <h4 class="title">Made with &#10084; by Sook-Hee Evans, Sejal Dua, and Gerard Frasca</h4>
 </footer>

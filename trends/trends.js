@@ -1,4 +1,3 @@
-/* BEGIN BUBBLE SHIT */
 var max_income = 123000;
 var min_income = 18000;
 var max_pop = 1000000;
@@ -122,10 +121,10 @@ function get_move(d) {
 function make_x_axis(dem) {
 
   var margin = {top: 300, right: 250, bottom: 50, left: 50};
-  var width = $("#maps").width()
-  var height = $("#maps").height()
+  var width = $("#bubbles").width()
+  var height = $("#bubbles").height()
 
-  pos = $("#maps").position().top;
+  pos = $("#bubbles").position().top;
 
   var bubbles = d3.select(".bubble_svg")
 
@@ -156,8 +155,8 @@ function update_demographic(dem, val) {
   var t = d3.transition()
         .duration(750);
 
-  var width = $("#maps").width()
-  var height = $("#maps").height()
+  var width = $("#bubbles").width()
+  var height = $("#bubbles").height()
 
   var bubbles = d3.select(".bubble_svg")
 
@@ -200,15 +199,13 @@ function update_demographic(dem, val) {
 
 // to be used with swapmap to replace map with bubbles
 function make_bubbles_rep(us, val, dem) {
-  console.log(dem);
-  console.log("swap map");
 
   var margin = {top: 300, right: 250, bottom: 50, left: 50};
   d3.select(".bubble_svg").remove();
-  var width = $("#maps").width()
-  var height = $("#maps").height()
+  var width = $("#bubbles").width()
+  var height = $("#bubbles").height()
 
-  pos = $("#maps").position().top;
+  pos = $("#bubbles").position().top;
 
   rad_range = get_rad_range(width)
  
@@ -223,13 +220,13 @@ function make_bubbles_rep(us, val, dem) {
   d3.json("./bubble/dem-data.json", function(error, data) {
     if (error) throw error;
 
-  var bubbles = d3.select("#maps").append("svg")
+  var bubbles = d3.select("#bubbles").append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("class", "bubble_svg")
     .attr("shape-rendering", "geometric-precision");
 
-  $("#maps").css("visibility", "visible");
+  $("#bubbles").css("visibility", "visible");
 
 
   var tip = d3.tip()
