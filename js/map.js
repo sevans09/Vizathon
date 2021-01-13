@@ -1,19 +1,19 @@
+var dicts = []
+var data_arr = [data_2011, data_2012, data_2013, data_2014, data_2015, data_2016, data_2017, data_2018, data_2019, data_2020]
+data_arr.forEach( function(arr) {
+  temp_dict = d3.map();
+  arr.forEach(function(d) {
+    temp_dict.set( d.FIPS, d.obesity_rate);
+  });
+  dicts.push(temp_dict);
+});
 
 function makeMap(us) {
     var val = document.getElementById("myRange").value;
     document.getElementById("year").innerHTML = years[val-1];
     // create different move dict depending on the slider val
-    move_dict = d3.map();
-    if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-    else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+
+    move_dict = dicts[val];
     
     var num_error_counties = 0;
     
@@ -49,9 +49,6 @@ function makeMap(us) {
     if (selected_fips != null)
       highlight_single(selected_fips);
   }
-  
-  
-  
   
   function addDropdown(fips) {
     $( ".dropbtn" ).show();
