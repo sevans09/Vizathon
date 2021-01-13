@@ -8,7 +8,7 @@ function make_bubbles(val, dem) {
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
   $("#bubbles").empty()
   var width = $("#bubbles").width() * 3
-  var height = $("#bubbles").height() / 1.5
+  var height = $("#bubbles").height() / 2.5
 
   var max_income = 123000;
   var min_income = 23000;
@@ -57,7 +57,7 @@ function make_bubbles(val, dem) {
     county_dict.set( d.fips, d.county);
     sab_dict.set(d.fips, d.sab);
   });
-  
+
   var x = d3.scaleLinear()
     .domain( [min_max[dem].min, min_max[dem].max] )
     .range( [margin.left, width - margin.right] );
@@ -82,7 +82,9 @@ function make_bubbles(val, dem) {
       .attr('class', 'd3-tip')
       .offset([-5, 0])
       .html(function(d) {
-        return "County: " + toTitleCase(d.county) + " (" + d.sab + ")<br>Obesity Rate: " + d.obesity_rate + "<br>Population: " + numberWithCommas(d.pop) + "<br>Income: $" + numberWithCommas(d.income);
+        return "County: " + toTitleCase(d.county) + " (" + d.sab + 
+        ")<br>Obesity Rate: " + d.obesity_rate + "<br>Population: " + 
+        numberWithCommas(d.pop) + "<br>Income: $" + numberWithCommas(d.income);
       })
 
  
@@ -132,7 +134,6 @@ function make_bubbles(val, dem) {
         x: x(node.median_income),
         fx: x(node.median_income),
         r: radquantize(node.pop_2019),
-        // y: y_dict.get(node.fips)
       };
     });
 

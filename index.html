@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="dropdown" style="float:right; display:block">
-      <button class="dropbtn">Contributing Factors &#9660;</button>
+      <button class="dropbtn">Change Factor &#9660;</button>
       <form id= "radio_options" class="dropdown-content">
           <input type="radio" name="dem_radio" value="income" id="income_check" checked>Income
             <label class="dem_option" for="income_check"></label>
@@ -31,17 +31,17 @@
           <input type="radio" name="dem_radio" value="unemp" id="unemployment_check">Unemployment
           <label class="dem_option" for="politics_check"></label>
       </form>
+      <h2 class="title bubbleTitle" style="margin-top:10%; position:absolute" id="pageTitle"></h2>
     </div>  
     
   <div class="row">
       <div class="column1" style="position: sticky; margin-top:10px;">
-        <a href="#" id="toggleButton" value="MAP" class="myButton" style="display: none; margin-bottom: -5%; position: relative; z-index: 1; float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
-        <h2 class="title">Regional Adult Obesity Rates</h2>
+        <h2 class="title" id="pageTitle">Regional Adult Obesity Rates</h2>
         <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
         <div style="margin-top:-10%" id="map-legend"></div>
       </div>
-      <div class="column3" style="position:sticky; width:100%; margin-left:15%">
-          <svg id="bubbles" style="max-height:100%; min-height:400px;height:1000px; width:250px"></svg>
+      <div class="column3" style="position:sticky; width:100%; margin-left:12%">
+          <svg id="bubbles" style="max-height:100%; min-height:400px;height:1400px; width:250px"></svg>
       </div>
     </div>
   </div>
@@ -149,7 +149,7 @@ var tip = d3.tip()
 svg.call(tip)
 
 var ordinal = d3.scaleOrdinal()
-  .domain(["< 10%", "10%", "20%", "30%", "40% >="])
+  .domain(["< 20%", "20%", "30%", "40%", "50% >="])
   .range(["rgb(154,219,181)", "rgb(205, 235, 178)", "rgb(246,245,174)", 
           "rgb(253, 223, 158)", "rgb(211, 85, 65)"]);
 
@@ -163,7 +163,7 @@ var move_legend = d3.legendColor()
   .shapeWidth(50)
   .orient('horizontal')
   .scale(ordinal)
-  .title("Move Index");
+  .title("Obesity Rates (Lower Bound)");
 
 legend.select(".legend")
   .call(move_legend)

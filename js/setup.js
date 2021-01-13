@@ -23,10 +23,12 @@ function ready(error, us) {
     var dem = $("input[name='dem_radio']:checked").val();
 
     slider.addEventListener('change', function() {
+        // $(".bubbleTitle").text( $("input[name='dem_radio']:checked").val())
         change_move();
     });
 
     window.addEventListener('keypress', function(e) {
+        // $(".bubbleTitle").text( $("input[name='dem_radio']:checked").val())
         var keyCode = e.keyCode;
         var key = keyCode - 48
         if (key > 0 && key < 10) {

@@ -131,7 +131,7 @@ function make_x_axis(dem) {
 
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
   var width = $("#bubbles").width() * 3
-  var height = $("#bubbles").height() / 1.5
+  var height = $("#bubbles").height() / 2.5
 
   pos = $("#bubbles").position().top;
 
@@ -163,7 +163,7 @@ function update_demographic(dem, val) {
         .duration(750);
 
   var width = $("#bubbles").width() * 3
-  var height = $("#bubbles").height() / 1.5
+  var height = $("#bubbles").height() / 2.5
 
   var bubbles = d3.select(".bubble_svg")
 
@@ -210,7 +210,7 @@ function make_bubbles_rep(should_clear, val, dem) {
   }
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
   var width = $("#bubbles").width() * 3
-  var height = $("#bubbles").height() / 1.5
+  var height = $("#bubbles").height() / 2.5
 
   pos = $("#bubbles").position().top;
 
