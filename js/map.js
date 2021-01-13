@@ -9,6 +9,7 @@ data_arr.forEach( function(arr) {
 });
 
 function makeMap(us) {
+
     var val = document.getElementById("myRange").value;
     document.getElementById("year").innerHTML = years[val-1];
     // create different move dict depending on the slider val
@@ -118,3 +119,32 @@ function swapMap(us) {
       highlight_single(selected_fips);
   }
   
+  function change_move() {
+    unhighlight();
+
+    var val = document.getElementById("myRange").value;
+    document.getElementById("year").innerHTML = years[val-1];
+    move_dict = dicts[val];
+    console.log(move_dict);
+    var t = d3.transition()
+        .duration(750);
+  
+      // call ready to create map again, based on slider value
+      svg.selectAll("path")
+        .transition(t)
+          .attr("fill", function(d) {
+            // console.log(d);
+            if (move_dict.get(d.id)) {
+              // console.log(move_dict.get(d.id));
+              return quantize(move_dict.get(d.id));
+            }
+          });
+      // var bubbles = d3.select(".bubble_svg")
+      // bubbles.selectAll("circle")
+      //   .attr("move", function(d) {
+      //     move_dict.get(d.fips)[val-1] });
+    
+      // bubbles.selectAll("circle")
+      //   .transition(t)
+      //     .style("fill", function(d) { return quantize(move_dict.get(d.fips)[val-1]); });
+    }
