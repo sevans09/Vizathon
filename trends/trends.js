@@ -209,7 +209,7 @@ function update_demographic(dem, val) {
 
 // to be used with swapmap to replace map with bubbles
 function make_bubbles_rep(us, val, dem) {
-
+  console.log("making bubbles")
   var margin = {top: 300, right: 250, bottom: 50, left: 50};
   d3.select(".bubble_svg").remove();
   var width = $("#bubbles").width()

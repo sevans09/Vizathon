@@ -170,6 +170,12 @@ h1.title {
     width: 74%;
     margin-bottom: 0px
   }
+  .column3 {
+    float: right;
+    margin-top:10%;
+    width: 25%;
+    margin-bottom: 0px
+  }
   .column2 {
     margin-top: 20px;
     padding-left: .7vw;

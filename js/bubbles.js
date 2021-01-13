@@ -37,6 +37,7 @@ function make_bubbles(val, dem) {
 
   var move_dict = d3.map();
   var val = document.getElementById("myRange").value;
+
   // create different move dict depending on the slider val
   move_dict = d3.map();
   if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
@@ -60,7 +61,8 @@ function make_bubbles(val, dem) {
   var county_dict = d3.map();
   data_2018.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
 
-  var y = d3.scaleLinear()
+
+  var x = d3.scaleLinear()
     .domain( [min_max[dem].min, min_max[dem].max] )
     .range( [margin.left, width - margin.right] );
 
@@ -68,7 +70,7 @@ function make_bubbles(val, dem) {
       .domain([min_max['pop'].min, min_max['pop'].max])
       .range([2, 5])
 
-  var yAxis = d3.axisBottom(y);
+  var xAxis = d3.axisBottom(x);
 
   var tip = d3.tip()
       .attr('class', 'd3-tip')
@@ -89,13 +91,13 @@ function make_bubbles(val, dem) {
   bubbles.call(tip);
 
 
-  var yAxisTitle = bubbles.append("text")
+  var xAxisTitle = bubbles.append("text")
     .attr("class", "axisTitle")
     .text(dem_text[dem])
 
-  yAxisTitle
-    .attr("y", width - yAxisTitle.node().getBBox().width)
-    .attr("x", ( height/2) - yAxisTitle.node().getBBox().height);
+  xAxisTitle
+    .attr("x", width - xAxisTitle.node().getBBox().width)
+    .attr("y", ( height/2) - xAxisTitle.node().getBBox().height);
 
   var quantize = d3.scaleQuantize()
       .domain([0, 4])
@@ -112,12 +114,12 @@ function make_bubbles(val, dem) {
               return "rgb(211, 85, 65)";
       }))
 
-  var x_dict = d3.map();
+  var y_dict = d3.map();
 
 
-  x_pos = dem_pos[dem]
+  y_pos = dem_pos[dem]
 
-  x_pos.forEach( function(d){ x_dict.set( d.fips, (500) - d.x) });
+  y_pos.forEach( function(d){ y_dict.set( d.fips, (500) - d.y) });
 
     //add other demographics!
     var nodes = data.map(function(node, index) {
@@ -137,11 +139,11 @@ function make_bubbles(val, dem) {
     });
 
     bubbles.append("g")
-      .attr("class", "y axis")
-      .force("y", d3.forceY(function(d) { return y(d.income); }).strength(1))
-      .force("x", d3.forceX(( height/2)))
+      .attr("class", "x axis")
+      .force("x", d3.forceX(function(d) { return x(d.income); }).strength(1))
+      .force("y", d3.forceY(( height/2)))
       .attr("transform", "translate(0," + ( height/2)  + ")")
-      .call(yAxis);
+      .call(xAxis);
 
     var simulation = d3.forceSimulation(nodes)
       .force("collide", d3.forceCollide().radius(function(d){ return d.r}))

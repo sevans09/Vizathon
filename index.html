@@ -21,25 +21,7 @@
   </div>
   <div class="dropdown" style="float:right; display:block">
       <button class="dropbtn">Contributing Factors &#9660;</button>
-      <div class="dropdown-content">
-      <a href="#">Median Household Income</a>
-      <a href="#">Var 2</a>
-      <a href="#">Var 3</a>
-      </div>
-    </div>  
-    
-  <div class="row">
-      <div class="column1" style="position: sticky; margin-top:10px;">
-        <a href="#" id="toggleButton" value="MAP" class="myButton" style="display: none; margin-bottom: -5%; position: relative; z-index: 1; float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
-        <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
-        <div style="margin-top:-10%" id="map-legend"></div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div id= "dem_options" style="position: relative; margin-bottom: -15%; margin-top: 3%; border: 1px #000000 solid; padding: 0px 10px 10px 10px;float: left; margin-left: 5%; visibility: hidden">
-      <div id= "option_title"><h3 style="margin-bottom: 5px">Filter by Demographic</h3></div>
-        <form id= "radio_options">
+      <form id= "radio_options" class="dropdown-content">
           <input type="radio" name="dem_radio" value="income" id="income_check" checked>Income
             <label class="dem_option" for="income_check"></label>
           <br>
@@ -49,9 +31,22 @@
           <input type="radio" name="dem_radio" value="unemp" id="unemployment_check">Unemployment
           <label class="dem_option" for="politics_check"></label>
       </form>
+    </div>  
+    
+  <div class="row">
+      <div class="column1" style="position: sticky; margin-top:10px;">
+        <a href="#" id="toggleButton" value="MAP" class="myButton" style="display: none; margin-bottom: -5%; position: relative; z-index: 1; float: right; margin-right: 5%"style>Switch to Demographic Trends</a>
+        <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
+        <div style="margin-top:-10%" id="map-legend"></div>
+      </div>
+      <div class="column3" style="position:sticky">
+          <svg id="bubbles" style="max-height:100%; min-height:200px; width:1000px"></svg>
+      </div>
     </div>
-    <svg id="bubbles" style="max-height:100%; min-height:200px; width:100%"></svg>
   </div>
+  <!-- <div class="row">
+    <svg id="bubbles" style="max-height:100%; min-height:200px; width:100%"></svg>
+  </div> -->
 
 <footer>
   <h4 class="title">Made with &#10084; by Sook-Hee Evans, Sejal Dua, and Gerard Frasca</h4>
