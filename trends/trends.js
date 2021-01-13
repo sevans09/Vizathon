@@ -130,9 +130,9 @@ function get_move(d) {
 
 function make_x_axis(dem) {
 
-  var margin = {top: 300, right: 250, bottom: 50, left: 50};
-  var width = $("#bubbles").width()
-  var height = $("#bubbles").height()
+  var margin = {top: 50, right: 100, bottom: 50, left: 50};
+  var width = $("#bubbles").width() * 3
+  var height = $("#bubbles").height() / 1.5
 
   pos = $("#bubbles").position().top;
 
@@ -208,10 +208,10 @@ function update_demographic(dem, val) {
 // to be used with swapmap to replace map with bubbles
 function make_bubbles_rep(us, val, dem) {
   console.log("making bubbles")
-  var margin = {top: 300, right: 250, bottom: 50, left: 50};
+  var margin = {top: 50, right: 100, bottom: 50, left: 50};
   d3.select(".bubble_svg").remove();
-  var width = $("#bubbles").width()
-  var height = $("#bubbles").height()
+  var width = $("#bubbles").width() * 3
+  var height = $("#bubbles").height() / 1.5
 
   pos = $("#bubbles").position().top;
 
@@ -230,7 +230,7 @@ function make_bubbles_rep(us, val, dem) {
 
   var bubbles = d3.select("#bubbles").append("svg")
     .attr("width", width)
-    .attr("height", height)
+    .attr("height", height * 10)
     .attr("class", "bubble_svg")
     .attr("shape-rendering", "geometric-precision");
 

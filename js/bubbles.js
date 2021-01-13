@@ -6,10 +6,10 @@ function toTitleCase(str) {
 
 function make_bubbles(val, dem) {
   console.log("callling make bubbles, not rep")
-  var margin = {top: 0, right: 50, bottom: 50, left: 50};
+  var margin = {top: 50, right: 100, bottom: 50, left: 50};
   $("#bubbles").empty()
-  var width = $("#bubbles").width()
-  var height = $("#bubbles").height()
+  var width = $("#bubbles").width() * 3
+  var height = $("#bubbles").height() / 1.5
 
   var max_income = 123000;
   var min_income = 23000;
@@ -85,7 +85,7 @@ function make_bubbles(val, dem) {
 
  var bubbles = d3.select("#bubbles").append("svg")
     .attr("width", width)
-    .attr("height", height)
+    .attr("height", height * 10)
     .attr("shape-rendering", "geometric-precision");
 
   bubbles.call(tip);
