@@ -54,6 +54,10 @@ function ready(error, us) {
         if (dem == 'smoking') { $(".dropbtn").html("Smoking Rate &#9660;") }
         if (dem == 'poverty') { $(".dropbtn").html("Childhood Poverty Rate &#9660;") }
         var val = document.getElementById("myRange").value;
+<<<<<<< HEAD
+=======
+        // make_bubbles_rep(true, val, dem)
+>>>>>>> 2ff88f70d84d91bb8a10c6a97d5d3aaec4125571
         update_demographic(dem, val)
     });
 }
