@@ -181,7 +181,7 @@ h2.title {
   .column3 {
     float: left;
     margin-top:-25%;
-    margin-bottom: 0px
+    margin-bottom: -25%;
   }
 
  .column2 {
@@ -282,6 +282,8 @@ h2.title {
   
   .axisTitle {
     z-index: 8000;
+    margin-left:30%;
+    font-size:500px;
   }
   
   .bubble_svg {

@@ -106,15 +106,13 @@ function highlight_move(move_index) {
 function unhighlight() {
     selected_fips = null;
     console.log("testing");
-    var val = document.getElementById("myRange").value;
-    if(document.getElementById("toggleButton").value=="MAP") {
+
       svg.selectAll(".counties path")
         .transition()
         .duration(500)
         .style("opacity", 0.95)
         .style("stroke", "transparent")
-    }
-    else {
+
       var bubbles = d3.select(".bubble_svg")
       bubbles.selectAll("circle")
         .transition()
@@ -122,14 +120,13 @@ function unhighlight() {
         .style("opacity", 0.75)
         .style("stroke", "transparent")
   
-    }
+    
 }
 
 function highlight_single(county) {
     console.log(county);
     var val = document.getElementById("myRange").value;
-    if(document.getElementById("toggleButton").value=="MAP") {
-      console.log("map");
+
       svg.selectAll(".counties path")
         .transition()
         .duration(500)
@@ -139,8 +136,7 @@ function highlight_single(county) {
         .style("stroke", function(d) {
           return county == d.id ? "black" : "transparent"
         });
-    } else {
-      console.log("bubbles");
+
       var bubbles = d3.select(".bubble_svg")
       bubbles.selectAll("circle")
         .transition()
@@ -151,6 +147,6 @@ function highlight_single(county) {
         .style("stroke", function(d) {
           return (county == d.fips) ? "black" : "transparent"
         })
-    }
+    
     console.log("done");
   }

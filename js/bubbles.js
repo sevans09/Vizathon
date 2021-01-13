@@ -75,7 +75,7 @@ function make_bubbles(val, dem) {
     .style("z-index", 100)
 
   yAxisTitle
-    .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
+    .attr("x", width /2- yAxisTitle.node().getBBox().width - width/4.5)
     .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
 
   var tip = d3.tip()

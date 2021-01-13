@@ -75,6 +75,7 @@ unemp_data.forEach( function(d) {
 });
 
 
+
 function get_rad_range(width) {
   if (width >= 900) {
     return [3,8]
