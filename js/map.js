@@ -34,13 +34,10 @@ function makeMap(us) {
         .attr("d", path)
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide)
-<<<<<<< HEAD
         .on("hover", function(d) {handleClick(d.id)});
-=======
         .on("click", function(d) {handleClick(d.id)});
 
     console.log(num_error_counties);
->>>>>>> 2ff88f70d84d91bb8a10c6a97d5d3aaec4125571
   
     window.onclick = function(event) {
       if (event.target.id === "maps")
