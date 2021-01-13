@@ -428,6 +428,7 @@ h1.title {
 .dropbtn {
 
   background-color: white;
+  display:block;
   color: #4169e1;
   border: 2px solid #4169e1;
   padding: 16px;
