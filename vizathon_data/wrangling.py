@@ -26,6 +26,12 @@ def convert_fips(x):
         return x
 
 years = [str(num) for num in range(2011, 2021, 1)]
+cols_og = ['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '% Children in Poverty']
+cols_2020 = ['FIPS', 'County', 'State', '% Adults with Obesity', '% Smokers', '% Unemployed', '% Children in Poverty']
+og_dict = {'% Obese': 'obesity_rate', '% Adults with Obesity': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate'}
+
+max_obesity = 0
+min_obesity = 100
 
 for year in years:
     print("getting", year, "data...")
@@ -43,12 +49,18 @@ for year in years:
             new_header = df.iloc[0]
             df = df[1:] 
             df.columns = new_header 
-            df.drop(df.columns.difference(['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '% Children in Poverty', '% Healthy Food']), 1, inplace=True)
+            cols = cols_2020 if year == "2020" else cols_og            
+            df.drop(df.columns.difference(cols), 1, inplace=True)
             orig_df = pd.concat([orig_df, df], ignore_index=True)
 
         # post-processing
+
         orig_df['FIPS'] = orig_df['FIPS'].apply(lambda x: convert_fips(x))
-        orig_df.rename(columns={'% Obese': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate', '% Healthy Food': 'healthy_food_rate'}, inplace=True)
+        orig_df.rename(columns=og_dict, inplace=True)
+        if max(orig_df['obesity_rate']) > max_obesity:
+            max_obesity = max(orig_df['obesity_rate']) 
+        if min(orig_df['obesity_rate']) < min_obesity:
+            min_obesity = min(orig_df['obesity_rate'])
         # print(list(orig_df['obesity_rate']))
         orig_df.drop_duplicates(subset=['FIPS'], keep='last', inplace=True)
         orig_df.reset_index(drop=True, inplace=True)
@@ -59,4 +71,5 @@ for year in years:
         prepend_line("./../jsons/data_" + year + ".json", "data_" + year + " = ")
         # break
     # break
+print(min_obesity, max_obesity)
         

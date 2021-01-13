@@ -13,7 +13,7 @@
       <div id="slider_div">
         <h4 id="sliderinfo"></h4>
         <div class="row">
-          <input type="range" min="1" max="10" value="8" class="slider" id="myRange"><div id="year"></div>
+          <input type="range" min="0" max="9" value="9" class="slider" id="myRange"><div id="year"></div>
         </div>   
       </div> 
       <div id="alertdiv" style="display:none"></div>
@@ -80,8 +80,7 @@
 <script type = "text/javascript" src="trends/unemp.json"></script>
 <script type = "text/javascript" src="trends/demographic-data.json"></script>
 <script type = "text/javascript" src="trends/trends.js"></script>
-<script type = "text/javascript" src="donut/donut.js"></script>
-<script type = "text/javascript" src="donut/index.js"></script>
+<script type="text/javascript" src="js/bar.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/movement.js"></script>
 <script type="text/javascript" src="js/query.js"></script>
@@ -119,7 +118,7 @@ var selected_fips = null;
 var selected_state = null;
 
 var quantize = d3.scaleQuantize()
-      .domain([0, 50])
+      .domain([10, 60])
       .range(d3.range(5).map(function(i) { 
         if (i == 0)
               return "#9adbb5";
