@@ -129,14 +129,14 @@ function get_move(d) {
 }
 
 function make_x_axis(dem) {
+  var bubbles = d3.select(".bubble_svg")
+  bubbles.selectAll(".axis").remove();
 
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
   var width = $("#bubbles").width() * 3
   var height = $("#bubbles").height() / 1.5
 
   pos = $("#bubbles").position().top;
-
-  var bubbles = d3.select(".bubble_svg")
 
   var y = d3.scaleLinear()
   .domain( [min_max[dem].min, min_max[dem].max] )
@@ -151,6 +151,8 @@ function make_x_axis(dem) {
   yAxisTitle
     .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
     .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
+    
+ 
 
   bubbles.append("g")
     .attr("class", "y axis")
@@ -164,13 +166,13 @@ function update_demographic(dem, val) {
   var t = d3.transition()
         .duration(750);
 
-  var width = $("#bubbles").width()
-  var height = $("#bubbles").height()
+  var width = $("#bubbles").width() * 3
+  var height = $("#bubbles").height() / 1.5
 
   var bubbles = d3.select(".bubble_svg")
 
   bubbles.select(".axisTitle").remove()
-  bubbles.select("g.x.axis").remove()
+  bubbles.select("g.y.axis").remove()
   bubbles.select(".d3-tip").remove()
 
   var tip = d3.tip()

@@ -70,7 +70,16 @@ function make_bubbles(val, dem) {
       .domain([min_max['pop'].min, min_max['pop'].max])
       .range([2, 5])
 
-  var xAxis = d3.axisBottom(x);
+
+  var yAxis = d3.axisRight(y);
+
+  var yAxisTitle = bubbles.append("text")
+    .attr("class", "axisTitle")
+    .text(dem_title[dem]);
+
+  yAxisTitle
+    .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
+    .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
 
   var tip = d3.tip()
       .attr('class', 'd3-tip')
@@ -87,17 +96,9 @@ function make_bubbles(val, dem) {
     .attr("width", width)
     .attr("height", height * 10)
     .attr("shape-rendering", "geometric-precision");
-
+  bubbles.selectAll(".axis").remove();
   bubbles.call(tip);
 
-
-  var xAxisTitle = bubbles.append("text")
-    .attr("class", "axisTitle")
-    .text(dem_text[dem])
-
-  xAxisTitle
-    .attr("x", width - xAxisTitle.node().getBBox().width)
-    .attr("y", ( height/2) - xAxisTitle.node().getBBox().height);
 
   var quantize = d3.scaleQuantize()
       .domain([0, 4])
@@ -139,11 +140,11 @@ function make_bubbles(val, dem) {
     });
 
     bubbles.append("g")
-      .attr("class", "x axis")
+      .attr("class", "y axis")
       .force("x", d3.forceX(function(d) { return x(d.income); }).strength(1))
       .force("y", d3.forceY(( height/2)))
       .attr("transform", "translate(0," + ( height/2)  + ")")
-      .call(xAxis);
+      .call(yAxis);
 
     bubbles.selectAll("circle")
       .data(nodes)
