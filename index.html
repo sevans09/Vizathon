@@ -84,6 +84,64 @@
 <script type = "text/javascript" src="js/d3-legend.min.js"> </script>
 <script type = "text/javascript" src="js/detect_location.js"> </script>
 <script>
+us_state_abbrev = {
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'American Samoa': 'AS',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'District of Columbia': 'DC',
+    'Florida': 'FL',
+    'Georgia': 'GA',
+    'Guam': 'GU',
+    'Hawaii': 'HI',
+    'Idaho': 'ID',
+    'Illinois': 'IL',
+    'Indiana': 'IN',
+    'Iowa': 'IA',
+    'Kansas': 'KS',
+    'Kentucky': 'KY',
+    'Louisiana': 'LA',
+    'Maine': 'ME',
+    'Maryland': 'MD',
+    'Massachusetts': 'MA',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Mississippi': 'MS',
+    'Missouri': 'MO',
+    'Montana': 'MT',
+    'Nebraska': 'NE',
+    'Nevada': 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    'Northern Mariana Islands':'MP',
+    'Ohio': 'OH',
+    'Oklahoma': 'OK',
+    'Oregon': 'OR',
+    'Pennsylvania': 'PA',
+    'Puerto Rico': 'PR',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    'Tennessee': 'TN',
+    'Texas': 'TX',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Virgin Islands': 'VI',
+    'Virginia': 'VA',
+    'Washington': 'WA',
+    'West Virginia': 'WV',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY'
+}
 
 d3.select("#sliderinfo")
 .text("Slide to explore yearly changes in obesity.")
@@ -101,12 +159,10 @@ var svg = d3.select("#maps")
 d3.select("svg").style("cursor", "crosshair");
 
 var county_dict = d3.map();
+var state_fips_dict = d3.map();
 data_2018.forEach( function(d){ county_dict.set( d.FIPS, d.County) });
+data_2018.forEach( function(d){ state_fips_dict.set( d.FIPS, d.State) });
 
-var states_dict = d3.map();
-var state_names_dict = d3.map();
-var names_dict = {};
-var names_and_county_dict = d3.map();
 
 var years = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
 
@@ -142,7 +198,8 @@ var tip = d3.tip()
     var dataRow = county_dict.get(d.id)
     if (dataRow) {
       var val = document.getElementById("myRange").value;
-      return "County: " + toTitleCase(county_dict.get(d.id))  + "<br>Obesity Rate: " + move_dict.get(d.id)
+      return "County: " + toTitleCase(county_dict.get(d.id)) + " (" + us_state_abbrev[state_fips_dict.get(d.id)] + ")" + "<br>Obesity Rate: " + move_dict.get(d.id)
+      
     } else {
         return county_dict.get(d.id) + ": No data.";
     }

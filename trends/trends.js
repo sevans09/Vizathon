@@ -176,10 +176,9 @@ function update_demographic(dem, val) {
       .attr('class', 'd3-tip')
       .offset([-5, 0])
       .html(function(d) {
-        return "County: " + toTitleCase(d.county) 
-        + "<br>Obesity Rate: " + numberWithCommas(d.obesity_rate) 
-        + "<br>" + dem_label[dem] + ": " + get_x_value(dem, d);
-  })
+        return "County: " + toTitleCase(d.county) + " (" + d.sab + ")<br>Obesity Rate: " + d.obesity_rate + 
+        "<br>Population: " + numberWithCommas(d.pop)+ "<br>" + dem_label[dem] + ": " + get_x_value(dem, d);
+      })
 
   bubbles.call(tip);
 
