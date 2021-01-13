@@ -13,26 +13,30 @@
       <div id="slider_div">
         <h4 id="sliderinfo"></h4>
         <div class="row">
-          <input type="range" min="0" max="9" value="9" class="slider" id="myRange"><div id="year"></div>
+          <input type="range" min="0" max="9" value="9" class="slider" id="myRange"><div id="year" style="margin-top:-1.5%"></div>
         </div>   
       </div> 
       <div id="alertdiv" style="display:none"></div>
     </div>
+    <div class="dropdown" style="position:absolute; z-index:100; margin-left:80%; margin-top:3%">
+        <button class="dropbtn">Change Factor &#9660;</button>
+        <form id= "radio_options" class="dropdown-content">
+            <input type="radio" name="dem_radio" value="income" id="income_check" checked>Median Income
+              <label class="dem_option" for="income_check"></label>
+            <br>
+            <input type="radio" name="dem_radio" value="unemp" id="unemployment_check">Unemployment Rate
+            <label class="dem_option" for="politics_check"></label>
+            <br>
+            <input type="radio" name="dem_radio" value="smoking" id="smoking_check">Smoking Rate
+            <label class="dem_option" for="smoking_check"></label>
+            <br>
+            <input type="radio" name="dem_radio" value="poverty" id="poverty_check">Childhood Poverty Rate
+            <label class="dem_option" for="poverty_check"></label>
+        </form>
+        <h2 class="title bubbleTitle" style="margin-top:10%; position:absolute" id="pageTitle"></h2>
+      </div>  
   </div>
-  <div class="dropdown" style="float:right; margin-top:2%; display:block">
-      <button class="dropbtn">Change Factor &#9660;</button>
-      <form id= "radio_options" class="dropdown-content">
-          <input type="radio" name="dem_radio" value="income" id="income_check" checked>Income
-            <label class="dem_option" for="income_check"></label>
-          <br>
-          <input type="radio" name="dem_radio" value="vote" id="politics_check">Politics
-          <label class="dem_option" for="income_check"></label>
-          <br>
-          <input type="radio" name="dem_radio" value="unemp" id="unemployment_check">Unemployment
-          <label class="dem_option" for="politics_check"></label>
-      </form>
-      <h2 class="title bubbleTitle" style="margin-top:10%; position:absolute" id="pageTitle"></h2>
-    </div>  
+
     
   <div class="row">
       <div class="column1" style="position: sticky; margin-top:10px;">
@@ -40,8 +44,8 @@
         <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
         <div style="margin-top:-10%" id="map-legend"></div>
       </div>
-      <div class="column3" style="position:sticky; width:100%; margin-left:12%">
-          <svg id="bubbles" style="max-height:100%; min-height:400px;height:1300px; width:250px"></svg>
+      <div class="column3" style="position:sticky; width:100%; margin-left:5%">
+          <svg id="bubbles" style="max-height:100%; min-height:400px;height:1250px; width:275px"></svg>
       </div>
     </div>
   </div>

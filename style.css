@@ -180,7 +180,7 @@ h2.title {
   }
   .column3 {
     float: left;
-    margin-top:-20%;
+    margin-top:-22%;
     margin-bottom: -25%;
   }
 
@@ -261,12 +261,6 @@ h2.title {
     margin-right: 100px;
   }
 
-  /* #slider_div {
-    float: left;
-    margin-left: 30%;
-    margin-bottom: 20px;
-  } */
-  
   #scatterplot {
     width: 100%;
   }
@@ -416,13 +410,6 @@ h2.title {
         position:relative;
         top:1px;
     }
-
-        
-
-  /* #slider_div {
-    position: absolute;
-    bottom: 0px;
-  } */
   
   /* Make the percentage on the text labels bold*/
   .labelName tspan {
@@ -439,7 +426,6 @@ h2.title {
 
 /* RIGHT SIDE DROP DOWN*/
 .dropbtn {
-
   background-color: white;
   display:block;
   color: black;
@@ -480,6 +466,11 @@ h2.title {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.dropbtn:hover .dropdown-content {
+  display: block;
+  background-color:yellow;
 }
 
 .dropdown:hover .dropbtn {

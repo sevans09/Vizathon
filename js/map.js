@@ -34,7 +34,7 @@ function makeMap(us) {
         .attr("d", path)
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide)
-        .on("click", function(d) {handleClick(d.id)});
+        .on("hover", function(d) {handleClick(d.id)});
   
     window.onclick = function(event) {
       if (event.target.id === "maps")
