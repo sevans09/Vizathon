@@ -6,6 +6,13 @@ h1.title {
     text-align: center;
     font-family: 'Cantarell', sans-serif;
   }
+
+h2.title {
+    margin-bottom: -10px;
+    text-align: center;
+    font-family: 'Cantarell', sans-serif;
+    font-size: 30;
+}
   
   h4.title {
     margin: 0;
