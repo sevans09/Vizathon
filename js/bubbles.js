@@ -5,7 +5,7 @@ function toTitleCase(str) {
 }
 
 function make_bubbles(val, dem) {
-
+  console.log("callling make bubbles, not rep")
   var margin = {top: 0, right: 50, bottom: 50, left: 50};
   $("#bubbles").empty()
   var width = $("#bubbles").width()

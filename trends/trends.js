@@ -142,7 +142,7 @@ function make_x_axis(dem) {
   .domain( [min_max[dem].min, min_max[dem].max] )
   .range( [margin.left, width - margin.right] );
 
-  var yAxis = d3.axisBottom(y);
+  var yAxis = d3.axisRight(y);
 
   var yAxisTitle = bubbles.append("text")
     .attr("class", "axisTitle")
@@ -155,11 +155,10 @@ function make_x_axis(dem) {
   bubbles.append("g")
     .attr("class", "y axis")
     .attr("transform", "translate(0," + (height/2)  + ")")
-    .call(xAxis);
+    .call(yAxis);
 }
 
 function update_demographic(dem, val) {
-  console.log("update");
   console.log(dem);
   var margin = {top: 300, right: 250, bottom: 50, left: 50};
   var t = d3.transition()
@@ -178,7 +177,6 @@ function update_demographic(dem, val) {
       .attr('class', 'd3-tip')
       .offset([-5, 0])
       .html(function(d) {
-        console.log("d is", d)
         return "County: " + toTitleCase(d.county) 
         + "<br>Obesity Rate: " + numberWithCommas(d.obesity_rate) 
         + "<br>" + dem_label[dem] + ": " + get_x_value(dem, d);
@@ -200,8 +198,8 @@ function update_demographic(dem, val) {
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
     .transition(t)
-      .attr("cx", function(d) { return x(get_d_x(dem, d))})
-      .attr("cy", function(d) { return y_dict.get(d.fips)})
+      .attr("cy", function(d) { return x(get_d_x(dem, d))})
+      .attr("cx", function(d) { return y_dict.get(d.fips)})
       .attr("transform", "translate(0," + height/2 + ")")
 
   make_x_axis(dem)
