@@ -175,21 +175,20 @@ h1.title {
     margin-top:-22%;
     margin-bottom: 0px
   }
-  .column2 {
+
+ .column2 {
     margin-top: 20px;
     padding-left: .7vw;
     padding-right: .7vw;
     float: left;
-    box-shadow: 3px 5px #888888;
-    background-color: #e6e6e6;
+    background-color: white;
     border: 1px solid #b3b2b2;
     border-radius:10px;
     height:auto;
     
     max-height:70%;
-    /* margin-bottom:500px; */
     width: 26%;
-  }
+  } 
   
   .row:after {
     content: "";
