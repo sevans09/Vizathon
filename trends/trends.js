@@ -138,22 +138,22 @@ function make_x_axis(dem) {
 
   var bubbles = d3.select(".bubble_svg")
 
-  var x = d3.scaleLinear()
+  var y = d3.scaleLinear()
   .domain( [min_max[dem].min, min_max[dem].max] )
   .range( [margin.left, width - margin.right] );
 
-  var xAxis = d3.axisBottom(x);
+  var yAxis = d3.axisBottom(y);
 
-  var xAxisTitle = bubbles.append("text")
+  var yAxisTitle = bubbles.append("text")
     .attr("class", "axisTitle")
     .text(dem_title[dem]);
 
-  xAxisTitle
-    .attr("x", width - xAxisTitle.node().getBBox().width - width/4.5)
-    .attr("y", ( height/2) - xAxisTitle.node().getBBox().height - height/5)
+  yAxisTitle
+    .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
+    .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
 
   bubbles.append("g")
-    .attr("class", "x axis")
+    .attr("class", "y axis")
     .attr("transform", "translate(0," + (height/2)  + ")")
     .call(xAxis);
 }
@@ -290,8 +290,8 @@ function make_bubbles_rep(us, val, dem) {
       .data(nodes)
       .enter().append("circle")
       .style("fill", function(d) { return quantize(move_dict.get(d.fips)); })
-      .attr("cx", function(d) { return x(get_d_x(dem, d))} )
-      .attr("cy", function(d) { return y_dict.get(d.fips)} )
+      .attr("cy", function(d) { return x(get_d_x(dem, d))} )
+      .attr("cx", function(d) { return y_dict.get(d.fips)} )
       .attr("r", function(d) { return d.r} )
       .style("opacity", function(d) {
         return ((d.y + height/2) <= d.r || (d.y + height/2) >= (height - d.r)) ?  0 : 0.75})

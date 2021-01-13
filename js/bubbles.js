@@ -145,16 +145,7 @@ function make_bubbles(val, dem) {
       .attr("transform", "translate(0," + ( height/2)  + ")")
       .call(xAxis);
 
-    var simulation = d3.forceSimulation(nodes)
-      .force("collide", d3.forceCollide().radius(function(d){ return d.r}))
-      .force("manyBody", d3.forceManyBody().strength(-1))
-      
-    for (var i = 500 - 1; i >= 0; i--) {
-      console.log("tick")
-      simulation.tick()
-    }
-
-    var circle = bubbles.selectAll("circle")
+    bubbles.selectAll("circle")
       .data(nodes)
       .enter().append("circle")
       .style("fill", function(d) { return quantize(d.move); })

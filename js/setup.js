@@ -37,7 +37,7 @@ function ready(error, us) {
 
     document.getElementById("toggleButton").value="MAP";
     makeMap(us);
-    
+
     $( "#dem_options" ).show();
     $("#bubbles").css("visibility", "visible"); 
     $("#dem_options").css("visibility", "visible")
@@ -45,10 +45,6 @@ function ready(error, us) {
     var val = document.getElementById("myRange").value;
     dem = $("input[name='dem_radio']:checked").val();
     make_bubbles_rep(us, val, dem)
-
-
-    document.getElementById("toggleButton").addEventListener("click", 
-    function(){ swapMap(us);});
 
     $('#radio_options').change(function(){
         dem = $("input[name='dem_radio']:checked").val();
