@@ -183,16 +183,6 @@ function make_x_axis(dem) {
 
   var yAxis = d3.axisRight(y);
 
-  var yAxisTitle = bubbles.append("text")
-    .attr("class", "axisTitle")
-    // .text(dem_title[dem] + "%");
-
-  console.log(width/2);
-  yAxisTitle
-    .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
-    // .attr("x", width)
-    .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
-
   bubbles.append("g")
     .attr("class", "y axis")
     .attr("transform", "translate(" + width/6 + "," + (height/2)  + ")")
@@ -201,7 +191,7 @@ function make_x_axis(dem) {
 
 function update_demographic(dem, val) {
   console.log(dem);
-  var margin = {top: 300, right: 250, bottom: 50, left: 50};
+  var margin = {top: 50, right: 100, bottom: 50, left: 50};
   var t = d3.transition()
         .duration(750);
 
@@ -230,7 +220,7 @@ function update_demographic(dem, val) {
 
   var y_dict = d3.map();
   y_pos = dem_pos[dem];
-  y_pos.forEach( function(d){ y_dict.set(d.fips, margin.right - d.y )});
+  y_pos.forEach( function(d){ y_dict.set(d.fips, d.y - height/2)});
   // console.log(y_dict);
 
   var circle = bubbles.selectAll("circle")
