@@ -47,7 +47,12 @@ function ready(error, us) {
         dem = $("input[name='dem_radio']:checked").val();
         if (dem == 'unemp') { $(".dropbtn").html("Unemployment Rate &#9660;") }
         if (dem == 'income') { $(".dropbtn").html("Median Income &#9660;") }
-        if (dem == 'cpr') { $(".dropbtn").html("Childhood Poverty Rate &#9660;") }
+        if (dem == 'cpr') { $(".dropbtn").html("Childhood Poverty Rate &#9660") }
+        if (dem == 'smoke') { $(".dropbtn").html("Smoking &#9660") }
+        if (dem == 'exer') { $(".dropbtn").html("Exercise Opportunities &#9660") }
+        if (dem == 'drink') { $(".dropbtn").html("Excessive Drinking &#9660") }
+        
+     }
         var val = document.getElementById("myRange").value;
         // make_bubbles_rep(true, val, dem)
         update_demographic(dem, val)
