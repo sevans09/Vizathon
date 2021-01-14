@@ -302,7 +302,7 @@ h2.title {
     position: absolute;
     text-align: center;
     opacity: 0;
-    z-index: 1;
+    z-index: 1000;
     background-color: rgba(255,255,255, 0.767);
   }
 
