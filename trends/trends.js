@@ -114,8 +114,8 @@ function make_x_axis(dem) {
   bubbles.selectAll(".axis").remove();
 
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
-  var width = $("#bubbles").width() * 3
-  var height = $("#bubbles").height() / 2.5
+  var width = $("#bubbles").width() * 3;
+  var height = $("#bubbles").height() / 2.5;
 
   pos = $("#bubbles").position().top;
 
@@ -129,6 +129,7 @@ function make_x_axis(dem) {
     .attr("class", "axisTitle")
     // .text(dem_title[dem] + "%");
 
+  console.log(width/2);
   yAxisTitle
     .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
     // .attr("x", width)
@@ -136,7 +137,7 @@ function make_x_axis(dem) {
 
   bubbles.append("g")
     .attr("class", "y axis")
-    .attr("transform", "translate(0," + (height/2)  + ")")
+    .attr("transform", "translate(" + width/6 + "," + (height/2)  + ")")
     .call(yAxis);
 }
 
@@ -171,7 +172,7 @@ function update_demographic(dem, val) {
 
   var y_dict = d3.map();
   y_pos = dem_pos[dem];
-  y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
+  y_pos.forEach( function(d){ y_dict.set(d.fips, margin.right - d.y )});
   // console.log(y_dict);
 
   var circle = bubbles.selectAll("circle")
@@ -182,7 +183,7 @@ function update_demographic(dem, val) {
     .transition(t)
       .attr("cy", function(d) { return x(get_d_x(dem, d))})
       .attr("cx", function(d) { return y_dict.get(d.fips)})
-      .attr("transform", "translate(0," + height/2 + ")")
+      .attr("transform", "translate(" + width/6 + "," + height/2 + ")")
 
   make_x_axis(dem);
 
@@ -260,31 +261,32 @@ function make_bubbles_rep(should_clear, val, dem) {
       .data(nodes)
       .enter().append("circle")
       .style("fill", function(d) { return quantize(move_dict.get(d.fips)); })
-      .attr("cy", function(d) { return x(get_d_x(dem, d))} )
-      .attr("cx", function(d) { return y_dict.get(d.fips)} )
+      .attr("cy", function(d) { return d.x} )
+      .attr("cx", function(d) { return d.y} )
       .attr("r", function(d) { return d.r} )
-      .style("opacity", function(d) {
-        return ((d.y + height/2) <= d.r || (d.y + height/2) >= (height - d.r)) ?  0 : 0.75})
-      .attr("transform", "translate(0," + margin.top + (height / 2) + ")")
+      // .style("opacity", function(d) {
+        // return ((d.y + height/2) <= d.r || (d.y + height/2) >= (height - d.r)) ?  0 : 0.75})
+      .style("opacity", 0.75)
+      .attr("transform", "translate(" + width/6 + "," + height/2 + ")")
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
       // .on('mouseover', function(d) {handleHover(d.fips);  tip.show })
       .on('click', function(d) { handleClick(d.fips) })
 
-    var simulation = d3.forceSimulation(nodes)
-    .force("x", d3.forceX(function(d) { return x(d.cpr); }).strength(1))
-    .force("y", d3.forceY(margin.top + (height / 2)))
-    .force("collide", d3.forceCollide().radius(function(d){ return d.r}))
-    .force("manyBody", d3.forceManyBody().strength(-1))
+    // var simulation = d3.forceSimulation(nodes)
+    // .force("x", d3.forceX(function(d) { return margin.top + x(d.cpr); }).strength(1))
+    // .force("y", d3.forceY((height/2)).strength(1))
+    // .force("collide", d3.forceCollide().radius(function(d){ return d.r}))
+    // .force("manyBody", d3.forceManyBody().strength(-1))
 
-    for (var i = 500 - 1; i >= 0; i--) {
-      simulation.tick()
-    }
-    pos_dict = [];
-    circle._groups[0].forEach( function(d){ 
-      pos_dict.push(d.__data__)
-    });
-    console.log(JSON.stringify(pos_dict, null, 4));
+    // for (var i = 500 - 1; i >= 0; i--) {
+    //   simulation.tick()
+    // }
+    // pos_dict = [];
+    // circle._groups[0].forEach( function(d){ 
+    //   pos_dict.push(d.__data__)
+    // });
+    // console.log(JSON.stringify(pos_dict, null, 4));
 
 
     make_x_axis(dem)
