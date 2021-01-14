@@ -30,8 +30,8 @@ cols_og = ['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '%
 cols_2020 = ['FIPS', 'County', 'State', '% Adults with Obesity', '% Smokers', '% Unemployed', '% Children in Poverty', '% With Access to Exercise Opportunities', '% Excessive Drinking']
 og_dict = {'% Obese': 'obesity_rate', '% Adults with Obesity': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate', '% With Access': 'exercise', '% With Access to Exercise Opportunities': 'exercise', '% Excessive Drinking': 'drinking'}
 
-min_smoke = 100
-max_smoke = 0
+min_drinking = 100
+max_drinking = 0
 
 for year in years:
     print("getting", year, "data...")
@@ -61,19 +61,19 @@ for year in years:
         orig_df['FIPS'] = orig_df['FIPS'].apply(lambda x: convert_fips(x))
         orig_df.rename(columns=og_dict, inplace=True)
         if year == "2020":
-            if max(orig_df['smoking_rate']) > max_smoke:
-                max_smoke = max(orig_df['smoking_rate']) 
-            if min(orig_df['smoking_rate']) < min_smoke:
-                min_smoke = min(orig_df['smoking_rate'])
+            if max(orig_df['drinking']) > max_drinking:
+                max_drinking = max(orig_df['drinking']) 
+            if min(orig_df['drinking']) < min_drinking:
+                min_drinking = min(orig_df['drinking'])
         # print(list(orig_df['obesity_rate']))
         orig_df.drop_duplicates(subset=['FIPS'], keep='last', inplace=True)
         orig_df.reset_index(drop=True, inplace=True)
 
         # print(orig_df.head())
         # print(list(orig_df.columns))
-        orig_df.to_json("./../jsons/data_" + year + ".json", orient='records')
-        prepend_line("./../jsons/data_" + year + ".json", "data_" + year + " = ")
+        # orig_df.to_json("./../jsons/data_" + year + ".json", orient='records')
+        # prepend_line("./../jsons/data_" + year + ".json", "data_" + year + " = ")
         # break
     # break
-print(min_smoke, max_smoke)
+print(min_drinking, max_drinking)
         

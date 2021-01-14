@@ -10,6 +10,10 @@ var min_cpr = 2.5;
 var max_cpr = 68.3;
 var min_smoke = 5;
 var max_smoke = 42;
+var min_exercise = 0;
+var max_exercise = 100;
+var min_drinking = 7;
+var max_drinking = 29;
 
 var min_max = {
   "income": {'min': min_income, 'max': max_income},
@@ -17,33 +21,38 @@ var min_max = {
   "unemp" : {'min': min_unemp, 'max': max_unemp},
   "cpr"   : {'min': min_cpr, 'max': max_cpr},
   "smoke" : {'min': min_smoke, 'max': max_smoke},
-  "exer"  : {'min': min_exercise, 'max': max_exercise}
+  "exer"  : {'min': min_exercise, 'max': max_exercise},
+  "drink" : {'min': min_drinking, 'max': max_drinking} 
 }
 
 var dem_title = {
   "income": "Median Income",
   "unemp" : "Unemployment Rate",
   "cpr"   : "Childhood Poverty Rate",
-  "smoke" : "Smoking Rate"
+  "smoke" : "Smoking Rate",
+  "exer"  : "Exercise Opportunities",
+  "drink" : "Excessive Drinking Rate"
 }
 
 var dem_label = {
   "income": "Income: $",
   "unemp" : "Unemployment",
   "cpr"   : "Childhood Poverty Rate",
-  "smoke" : "Smoking Rate"
+  "smoke" : "Smoking Rate",
+  "exer"  : "Exercise Opportunities",
+  "drink" : "Excessive Drinking Rate"
 }
 
 
 var dem_pos = {
   "income": income_pos,
-  "vote"  : pos_vote,
   "unemp" : unemp_pos,
   "cpr"   : cpr_pos,
-  "smoke" : smoke_pos
+  "smoke" : smoke_pos,
+  "exer"  : exercise_pos,
+  "drink" : drinking_pos
 }
 
-console.log(dem_pos["income"]);
 
 var pop_dict = d3.map();
 dem_data.forEach( function(d){ 
@@ -60,10 +69,19 @@ data_2020.forEach(function (d) {
   childpov_dict.set(d.FIPS, d.childhood_poverty_rate);
 })
 
-
 var smoke_dict = d3.map();
 data_2020.forEach(function (d) {
   smoke_dict.set(d.FIPS, d.smoking_rate);
+})
+
+var exercise_dict = d3.map();
+data_2020.forEach(function (d) {
+  exercise_dict.set(d.FIPS, d.exercise);
+})
+
+var drinking_dict = d3.map();
+data_2020.forEach(function (d) {
+  drinking_dict.set(d.FIPS, d.drinking);
 })
 
 function get_rad_range(width) {
@@ -95,6 +113,12 @@ function get_x_value(dem, data) {
   else if (dem == "smoke") {
     return data.smoke;
   }
+  else if (dem == "exer") {
+    return data.exercise;
+  }
+  else if (dem == "drink") {
+    return data.drinking;
+  }
   // return (dem == "vote") ? percentFormat(data.vote) : data.cases;
 }
 
@@ -111,6 +135,12 @@ function get_node_x(dem, node) {
     else if (dem == "smoke") {
       return node.smoke  
     }
+    else if (dem == "exer") {
+      return node.exercise;
+    }
+    else if (dem == "drink") {
+      return node.drinking;
+    }
     // return (dem == "vote") ? node.per_gop : node.cpc
 }
 
@@ -126,6 +156,12 @@ function get_d_x(dem, node) {
     }
     else if (dem == "smoke") {
       return node.smoke  
+    }
+    else if (dem == "exer") {
+      return node.exercise;
+    }
+    else if (dem == "drink") {
+      return node.drinking;
     }
     // return (dem == "vote") ? node.vote : node.cpc
 }
@@ -272,6 +308,8 @@ function make_bubbles_rep(should_clear, val, dem) {
         unemp: unemp_dict.get(node.fips),
         cpr: childpov_dict.get(node.fips),
         smoke: smoke_dict.get(node.fips),
+        exercise: exercise_dict.get(node.fips),
+        drinking: drinking_dict.get(node.fips),
         x: x(get_node_x(dem, node)),
         fx: x(get_node_x(dem, node)),
         r: radquantize(node.pop_2019),
@@ -297,7 +335,7 @@ function make_bubbles_rep(should_clear, val, dem) {
       .on('click', function(d) { handleClick(d.fips) })
 
     // var simulation = d3.forceSimulation(nodes)
-    // .force("x", d3.forceX(function(d) { return x(d.smoke); }).strength(1))
+    // .force("x", d3.forceX(function(d) { return x(d.drinking); }).strength(1))
     // .force("y", d3.forceY((height/2)).strength(1))
     // .force("collide", d3.forceCollide().radius(function(d){ return d.r + 0.2}))
     // .force("manyBody", d3.forceManyBody().strength(-1))
