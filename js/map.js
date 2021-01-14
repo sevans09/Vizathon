@@ -34,7 +34,7 @@ function makeMap(us) {
         .attr("d", path)
         .on("mouseover", tip.show)
         .on("mouseout", tip.hide)
-        .on("mouseover", function(d) {handleHover(d.id)})
+        // .on("mouseover", function(d) {handleHover(d.id)})
         .on("click", function(d) {handleClick(d.id)});
 
     console.log(num_error_counties);

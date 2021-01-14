@@ -68,23 +68,22 @@ function highlight_single(county) {
   }
 
 
-  function handleHover(county) {
-    unhighlight();
-    svg.selectAll(".counties path")
-      .transition()
-      .duration(500)
-      .style("stroke", function(d) {
-        return county == d.id ? "black" : "transparent"
-      });
+  // function handleHover(county) {
+  //   svg.selectAll(".counties path")
+  //     .transition()
+  //     .duration(500)
+  //     .style("stroke", function(d) {
+  //       return county == d.id ? "black" : "transparent"
+  //     });
 
-    var bubbles = d3.select(".bubble_svg")
-    bubbles.selectAll("circle")
-      .transition()
-      .duration(500)
-      .style("opacity", function(d) {
-        return (county == d.fips) ? 0.75 : 0.2
-      })
-      .style("stroke", function(d) {
-        return (county == d.fips) ? "black" : "transparent"
-      })
+  //   var bubbles = d3.select(".bubble_svg")
+  //   bubbles.selectAll("circle")
+  //     .transition()
+  //     .duration(500)
+  //     .style("opacity", function(d) {
+  //       return (county == d.fips) ? 0.75 : 0.2
+  //     })
+  //     .style("stroke", function(d) {
+  //       return (county == d.fips) ? "black" : "transparent"
+  //     })
   }

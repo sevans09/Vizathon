@@ -278,11 +278,11 @@ function make_bubbles_rep(should_clear, val, dem) {
       .attr("transform", "translate(0," + height/2 + ")")
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
-      .on('mouseover', function(d) { handleHover(d.fips) })
+      // .on('mouseover', function(d) {handleHover(d.fips);  tip.show })
       .on('click', function(d) { handleClick(d.fips) })
 
     make_x_axis(dem)
-
+      
     if (selected_fips != null)
       highlight_single(selected_fips);
   });

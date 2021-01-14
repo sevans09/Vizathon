@@ -344,12 +344,12 @@ h2.title {
     margin-right: 50px;
   }
   
-  span{
+  /* span{
       height: 1.3vw;
       width: calc(100% / 10);
       background: black;
       display: inline-block;
-  }
+  } */
   span[data-color='1']{
       background: #9adbb5;
   }
