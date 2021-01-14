@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <title>Disrupting Childhood Obesity</title>
   <h1 class="title">Visualizing the Relationship between Obesity and Contributing Factors</h1></br>
@@ -18,8 +18,16 @@
       </div> 
       <div id="alertdiv" style="display:none"></div>
     </div>
-    <div class="dropdown" style="position:absolute; z-index:100; margin-left:82%; margin-top:3%">
-        <span><i class="fa fa-info-circle" style="font-size:24px"></i><button class="dropbtn">Change Factor &#9660;</button></span>
+    <div class="dropdown" style="position:absolute; z-index:100; margin-left:82%">
+      <div class="row">
+        <div class="column2" style="width:150%">
+            <button class="dropbtn">Change Factor &#9660;</button>
+        </div>
+        <div class="column3" style="margin-top:13%; margin-left:4%">
+            <a href="#" data-toggle="tooltip" data-placement="left" title="Hooray!"><i class="fa fa-info-circle" style="font-size:24px"></i></a>
+        </div>
+      </div>
+        
         <form id= "radio_options" class="dropdown-content">
             <input type="radio" name="dem_radio" value="income" id="income_check" checked>Median Income
               <label class="dem_option" for="income_check"></label>
@@ -81,6 +89,9 @@
 <script type = "text/javascript" src="js/d3-legend.min.js"> </script>
 <script type = "text/javascript" src="js/detect_location.js"> </script>
 <script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
 us_state_abbrev = {
     'Alabama': 'AL',
     'Alaska': 'AK',
