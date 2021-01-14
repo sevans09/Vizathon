@@ -121,10 +121,6 @@ function get_d_x(dem, node) {
     return (dem == "vote") ? node.vote : node.cpc
 }
 
-function get_move(d) {
-  var val = document.getElementById("myRange").value;
-  return move_dict.get(d.fips)[val-1]
-}
 
 function make_x_axis(dem) {
   var bubbles = d3.select(".bubble_svg")
@@ -149,8 +145,6 @@ function make_x_axis(dem) {
   yAxisTitle
     .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
     .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
-    
- 
 
   bubbles.append("g")
     .attr("class", "y axis")
