@@ -5,10 +5,12 @@ function toTitleCase(str) {
 }
 
 function make_bubbles(val, dem) {
-  var margin = {top: 50, right: 100, bottom: 50, left: 50};
-  $("#bubbles").empty()
-  var width = $("#bubbles").width() * 3
-  var height = $("#bubbles").height() / 2.5
+
+  var margin = {top: 0, right: 50, bottom: 50, left: 50},
+  $("#bubblediv").empty()
+  console.log("hello")
+  var width = $("#bubblediv").width()
+  var height = $("#bubblediv").height()
 
   var max_income = 123000;
   var min_income = 23000;
@@ -16,7 +18,7 @@ function make_bubbles(val, dem) {
   var min_pop = 169;
 
   var min_max = {
-    "income": {'min': min_income, 'max': max_income},
+    "income": {'min': min_income, 'max': max_income]},
     "pop"   : {'min': min_pop, 'max': max_pop}
   }
 
@@ -35,21 +37,7 @@ function make_bubbles(val, dem) {
   }
 
   var move_dict = d3.map();
-  var val = document.getElementById("myRange").value;
-
-  // create different move dict depending on the slider val
-  move_dict = d3.map();
-
-  if (val == 1) { console.log("val is 1");data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
+  og_data.forEach( function(d){ move_dict.set( d.fips, d.move_index) });
 
   var county_dict = d3.map();
   var sab_dict = d3.map();
@@ -66,38 +54,34 @@ function make_bubbles(val, dem) {
       .domain([min_max['pop'].min, min_max['pop'].max])
       .range([2, 5])
 
-
-  var yAxis = d3.axisRight(y);
-
-  var yAxisTitle = bubbles.append("text")
-    .attr("class", "axisTitle")
-    .text(dem_title[dem])
-    .style("z-index", 100)
-
-  yAxisTitle
-    .attr("x", width /2- yAxisTitle.node().getBBox().width - width/4.5)
-    .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
+  var xAxis = d3.axisBottom(x);
 
   var tip = d3.tip()
       .attr('class', 'd3-tip')
       .offset([-5, 0])
       .html(function(d) {
-        return "County: " + toTitleCase(d.county) + " (" + d.sab + 
-        ")<br>Obesity Rate: " + d.obesity_rate + "<br>Population: " + 
-        numberWithCommas(d.pop) + "<br>Income: $" + numberWithCommas(d.income);
+        return "County: " + toTitleCase(d.county) + " (" + d.sab + ")<br>Move Index: " + d.move + "<br>Population: " + numberWithCommas(d.pop) + "<br>Income: $" + numberWithCommas(d.income);
       })
 
  
   d3.json("./bubble/dem-data.json", function(error, data) {
     if (error) throw error;
 
- var bubbles = d3.select("#bubbles").append("svg")
+ var bubbles = d3.select("#bubblediv").append("svg")
     .attr("width", width)
-    .attr("height", height * 10)
+    .attr("height", height)
     .attr("shape-rendering", "geometric-precision");
-  bubbles.selectAll(".axis").remove();
+
   bubbles.call(tip);
 
+
+  var xAxisTitle = bubbles.append("text")
+    .attr("class", "axisTitle")
+    .text(dem_text[dem])
+
+  xAxisTitle
+    .attr("x", width - xAxisTitle.node().getBBox().width)
+    .attr("y", ( height/2) - xAxisTitle.node().getBBox().height);
 
   var quantize = d3.scaleQuantize()
       .domain([0, 4])
@@ -134,17 +118,27 @@ function make_bubbles(val, dem) {
         x: x(node.median_income),
         fx: x(node.median_income),
         r: radquantize(node.pop_2019),
+        // y: y_dict.get(node.fips)
       };
     });
 
     bubbles.append("g")
-      .attr("class", "y axis")
+      .attr("class", "x axis")
       .force("x", d3.forceX(function(d) { return x(d.income); }).strength(1))
       .force("y", d3.forceY(( height/2)))
       .attr("transform", "translate(0," + ( height/2)  + ")")
-      .call(yAxis);
+      .call(xAxis);
 
-    bubbles.selectAll("circle")
+    var simulation = d3.forceSimulation(nodes)
+      .force("collide", d3.forceCollide().radius(function(d){ return d.r}))
+      .force("manyBody", d3.forceManyBody().strength(-1))
+      
+    for (var i = 500 - 1; i >= 0; i--) {
+      console.log("tick")
+      simulation.tick()
+    }
+
+    var circle = bubbles.selectAll("circle")
       .data(nodes)
       .enter().append("circle")
       .style("fill", function(d) { return quantize(d.move); })

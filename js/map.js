@@ -1,11 +1,11 @@
 var dicts = []
 var data_arr = [data_2011, data_2012, data_2013, data_2014, data_2015, data_2016, data_2017, data_2018, data_2019, data_2020]
 data_arr.forEach( function(arr) {
-  temp_dict = d3.map();
+  obese_dict = d3.map();
   arr.forEach(function(d) {
-    temp_dict.set( d.FIPS, d.obesity_rate);
+    obese_dict.set( d.FIPS, d.obesity_rate);
   });
-  dicts.push(temp_dict);
+  dicts.push(obese_dict);
 });
 
 function makeMap(us) {

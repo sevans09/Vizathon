@@ -30,8 +30,8 @@ cols_og = ['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '%
 cols_2020 = ['FIPS', 'County', 'State', '% Adults with Obesity', '% Smokers', '% Unemployed', '% Children in Poverty', '% With Access to Exercise Opportunities', '% Excessive Drinking']
 og_dict = {'% Obese': 'obesity_rate', '% Adults with Obesity': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate', '% With Access': 'exercise', '% With Access to Exercise Opportunities': 'exercise', '% Excessive Drinking': 'drinking'}
 
-max_cpr = 0
-min_cpr = 100
+min_smoke = 100
+max_smoke = 0
 
 for year in years:
     print("getting", year, "data...")
@@ -61,10 +61,10 @@ for year in years:
         orig_df['FIPS'] = orig_df['FIPS'].apply(lambda x: convert_fips(x))
         orig_df.rename(columns=og_dict, inplace=True)
         if year == "2020":
-            if max(orig_df['childhood_poverty_rate']) > max_cpr:
-                max_cpr = max(orig_df['childhood_poverty_rate']) 
-            if min(orig_df['childhood_poverty_rate']) < min_cpr:
-                min_cpr = min(orig_df['childhood_poverty_rate'])
+            if max(orig_df['smoking_rate']) > max_smoke:
+                max_smoke = max(orig_df['smoking_rate']) 
+            if min(orig_df['smoking_rate']) < min_smoke:
+                min_smoke = min(orig_df['smoking_rate'])
         # print(list(orig_df['obesity_rate']))
         orig_df.drop_duplicates(subset=['FIPS'], keep='last', inplace=True)
         orig_df.reset_index(drop=True, inplace=True)
@@ -75,5 +75,5 @@ for year in years:
         prepend_line("./../jsons/data_" + year + ".json", "data_" + year + " = ")
         # break
     # break
-print(min_cpr, max_cpr)
+print(min_smoke, max_smoke)
         
