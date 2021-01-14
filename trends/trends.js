@@ -188,7 +188,6 @@ function make_x_axis(dem) {
     return d.toString() + "%"});
   else if (dem === "unemp") {
     yAxis = d3.axisRight(y).tickFormat(function(d){
-      console.log(d);
       return (d*100).toFixed().toString()  + "%"});
   }     
   else {
@@ -239,8 +238,11 @@ function update_demographic(dem, val) {
   var circle = bubbles.selectAll("circle")
     .attr("x", function(d) { return x(get_d_x(dem, d))})
     .attr("y", function(d) { return y_dict.get(d.fips)})
-    .on('mouseover', tip.show)
+    .on("mouseover", function(d) {
+      tip.show(d);
+      handleHover(d.fips, true);})
     .on('mouseout', tip.hide)
+    .on('click', function(d) { handleClick(d.fips) })
     .transition(t)
       .attr("cy", function(d) { return x(get_d_x(dem, d))})
       .attr("cx", function(d) { return y_dict.get(d.fips)})
@@ -331,7 +333,9 @@ function make_bubbles_rep(should_clear, val, dem) {
         // return ((d.y + height/2) <= d.r || (d.y + height/2) >= (height - d.r)) ?  0 : 0.75})
       .style("opacity", 0.75)
       .attr("transform", "translate(" + width/3 + "," + height/2 + ")")
-      .on('mouseover', tip.show)
+      .on("mouseover", function(d) {
+        tip.show(d);
+        handleHover(d.fips, true);})
       .on('mouseout', tip.hide)
       // .on('mouseover', function(d) {handleHover(d.fips);  tip.show })
       .on('click', function(d) { handleClick(d.fips) })

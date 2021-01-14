@@ -222,6 +222,7 @@ var path = d3.geoPath()
 
 var tip = d3.tip()
   .attr('class', 'd3-tip')
+  .attr('id', 'tippp')
   .offset([-5, 0])
   .html(function(d) {
     var dataRow = county_dict.get(d.id)

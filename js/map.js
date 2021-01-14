@@ -32,15 +32,16 @@ function makeMap(us) {
           return;
         }; })
         .attr("d", path)
-        .on("mouseover", tip.show)
+        .on("mouseover", function(d) {
+          tip.show(d);
+          handleHover(d.id, false);})
         .on("mouseout", tip.hide)
-        // .on("mouseover", function(d) {handleHover(d.id)})
         .on("click", function(d) {handleClick(d.id)});
 
     console.log(num_error_counties);
   
     window.onclick = function(event) {
-      if (event.target.id === "maps")
+      if (event.target.id === "maps" || event.target.id === "bubbles")
         unhighlight();
     };
   
