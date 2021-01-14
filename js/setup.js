@@ -10,7 +10,6 @@ function toTitleCase(str) {
 
 function ready(error, us) {
     if (error) throw error;
-    $( "#alertdiv" ).hide();
     $( "#dem_options" ).hide();
 
     var slider = document.querySelector('input[type="range"]');
@@ -23,15 +22,15 @@ function ready(error, us) {
         change_move();
     });
 
-    window.addEventListener('keypress', function(e) {
-        // $(".bubbleTitle").text( $("input[name='dem_radio']:checked").val())
-        var keyCode = e.keyCode;
-        var key = keyCode - 48
-        if (key > 0 && key < 10) {
-        document.getElementById("myRange").value = key;
-        change_move();
-        }
-    });
+    // window.addEventListener('keypress', function(e) {
+    //     // $(".bubbleTitle").text( $("input[name='dem_radio']:checked").val())
+    //     var keyCode = e.keyCode;
+    //     var key = keyCode - 48
+    //     if (key > 0 && key < 10) {
+    //     document.getElementById("myRange").value = key;
+    //     change_move();
+    //     }
+    // });
 
     makeMap(us);
 

@@ -29,7 +29,6 @@ h2.title {
   }
   
   .dropbtn {
-    display: none;
     height: 36px;
     background-color: #565656;
     color: white;
@@ -46,7 +45,7 @@ h2.title {
   }
   
   .dropdown-content {
-    display: block;
+    display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 80px;
@@ -64,7 +63,7 @@ h2.title {
   /* .dropdown-content a:hover {background-color: #ddd; display:block} */
   
   .dropdown:hover .dropdown-content {display: block;}
-  dropdown-content:hover .dropdown-content {display: block;}
+
   
   .dropdown:hover .dropbtn {background-color: #565656;}
   
