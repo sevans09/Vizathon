@@ -43,13 +43,28 @@ function ready(error, us) {
     make_bubbles_rep(us, val, dem)
 
     $('#radio_options').change(function(){
+    
         dem = $("input[name='dem_radio']:checked").val();
-        if (dem == 'unemp') { $(".dropbtn").html("Unemployment Rate &#9660;") }
-        else if (dem == 'income') { $(".dropbtn").html("Median Income &#9660;")}
-        else if (dem == 'cpr') { $(".dropbtn").html("Childhood Poverty Rate &#9660") }
-        else if (dem == 'smoke') { $(".dropbtn").html("Smoking &#9660") }
-        else if (dem == 'exer') { $(".dropbtn").html("Exercise Opportunities &#9660") }
-        else if (dem == 'drink') { $(".dropbtn").html("Excessive Drinking &#9660") }
+        if (dem == 'unemp') { 
+            $(".tooltiptext").text("This depicts unemployment rate of adult Americans as a fraction. ")
+            $(".dropbtn").html("Unemployment Rate &#9660;") 
+        }
+        else if (dem == 'income') { 
+            
+            $(".dropbtn").html("Median Income &#9660;")
+        }
+        else if (dem == 'cpr') { 
+            
+            $(".dropbtn").html("Childhood Poverty Rate &#9660") }
+        else if (dem == 'smoke') { 
+            
+            $(".dropbtn").html("Smoking &#9660") }
+        else if (dem == 'exer') {
+            
+            $(".dropbtn").html("Exercise Opportunities &#9660") }
+        else if (dem == 'drink') { 
+            
+            $(".dropbtn").html("Excessive Drinking &#9660") }
 
         var val = document.getElementById("myRange").value;
         // make_bubbles_rep(true, val, dem)

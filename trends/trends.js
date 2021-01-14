@@ -185,6 +185,10 @@ function make_x_axis(dem) {
   if (dem !== "income")
     yAxis = d3.axisRight(y).tickFormat(function(d){
     return d.toString() + "%"});
+  else if (dem == "unemp")      
+    yAxis = d3.axisRight(y).tickFormat(function(d){
+    return d.toString()  + "%"});
+
   else 
     yAxis = d3.axisRight(y).tickFormat(function(d){
       return "$" + numberWithCommas(d);});
