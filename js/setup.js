@@ -50,8 +50,7 @@ function ready(error, us) {
             $(".dropbtn").html("Unemployment Rate &#9660;") 
         }
         else if (dem == 'income') { 
-            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and county’s median income; size of bubbles reflects county population
-")
+            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and county’s median income; size of bubbles reflects county population")
             $(".dropbtn").html("Median Income &#9660;")
         }
         else if (dem == 'cpr') { 
