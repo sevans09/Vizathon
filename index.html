@@ -16,7 +16,6 @@
           <input type="range" min="0" max="9" value="9" class="slider" id="myRange"><div id="year" style="margin-top:-1.5%"></div>
         </div>   
       </div> 
-      <div id="alertdiv" style="display:none"></div>
     </div>
     <div class="dropdown" style="position:absolute; z-index:100; margin-left:82%">
       <div class="row">
@@ -41,10 +40,13 @@
             <br>
             <input type="radio" name="dem_radio" value="cpr" id="poverty_check">Childhood Poverty Rate
             <label class="dem_option" for="poverty_check"></label>
+            <br>
             <input type="radio" name="dem_radio" value="smoke" id="smoke_check">Smoking
             <label class="dem_option" for="smoke_check"></label>
+            <br>
             <input type="radio" name="dem_radio" value="exer" id="exercise_check">Exercise Opportunities
             <label class="dem_option" for="exercise_check"></label>
+            <br>
             <input type="radio" name="dem_radio" value="drink" id="drinking_check">Excessive Drinking
             <label class="dem_option" for="drinking_check"></label>
         </form>
@@ -55,7 +57,7 @@
     
   <div class="row">
       <div class="column1" style="position: sticky; margin-top:10px;">
-        <h2 class="title" id="pageTitle">Regional Adult Obesity Rates</h2>
+        <!-- <h2 class="title" id="pageTitle">Regional Adult Obesity Rates</h2> -->
         <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
         <div style="margin-top:-10%" id="map-legend"></div>
       </div>
@@ -168,7 +170,7 @@ d3.select("#sliderinfo")
 .text("Slide to explore yearly changes in obesity.")
 
 var margin = {top: 10, left: 10, bottom: 10, right: 10}
-  , width = $("body").width() / 1.1
+  , width = $("body").width() / 1.2
   , width = width - margin.left - margin.right
   , mapRatio = .5
   , height = width * mapRatio;
