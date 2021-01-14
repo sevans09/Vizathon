@@ -273,20 +273,20 @@ function make_bubbles_rep(should_clear, val, dem) {
       // .on('mouseover', function(d) {handleHover(d.fips);  tip.show })
       .on('click', function(d) { handleClick(d.fips) })
 
-    var simulation = d3.forceSimulation(nodes)
-    .force("x", d3.forceX(function(d) { return margin.top + x(d.cpr); }).strength(1))
-    .force("y", d3.forceY((height/2)).strength(1))
-    .force("collide", d3.forceCollide().radius(function(d){ return d.r + 0.2}))
-    // .force("manyBody", d3.forceManyBody().strength(-0.5))
+    // var simulation = d3.forceSimulation(nodes)
+    // .force("x", d3.forceX(function(d) { return margin.top + x(d.cpr); }).strength(1))
+    // .force("y", d3.forceY((height/2)).strength(1))
+    // .force("collide", d3.forceCollide().radius(function(d){ return d.r + 0.2}))
+    // // .force("manyBody", d3.forceManyBody().strength(-0.5))
 
-    for (var i = 500 - 1; i >= 0; i--) {
-      simulation.tick()
-    }
-    pos_dict = [];
-    circle._groups[0].forEach( function(d){ 
-      pos_dict.push(d.__data__)
-    });
-    console.log(JSON.stringify(pos_dict, null, 4));
+    // for (var i = 500 - 1; i >= 0; i--) {
+    //   simulation.tick()
+    // }
+    // pos_dict = [];
+    // circle._groups[0].forEach( function(d){ 
+    //   pos_dict.push(d.__data__)
+    // });
+    // console.log(JSON.stringify(pos_dict, null, 4));
 
 
     make_x_axis(dem)
