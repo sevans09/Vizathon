@@ -181,7 +181,13 @@ function make_x_axis(dem) {
   .domain( [min_max[dem].min, min_max[dem].max] )
   .range( [margin.left, width - margin.right] );
 
-  var yAxis = d3.axisRight(y);
+  var yAxis;
+  if (dem !== "income")
+    yAxis = d3.axisRight(y).tickFormat(function(d){
+    return d.toString() + "%"});
+  else 
+    yAxis = d3.axisRight(y).tickFormat(function(d){
+      return "$" + numberWithCommas(d);});
 
   bubbles.append("g")
     .attr("class", "y axis")
