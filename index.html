@@ -8,6 +8,7 @@
   <h1 class="title">Visualizing the Relationship between Obesity and Contributing Factors</h1></br>
   <h4 class="title">Obese children are approximately 5 times more likely to become obese adults &#8224;. Several factors contribute to both adult and childhood obesity.</h4> 
   <h4 class="title">Nutrition, Physical Activity, and Obesity - Youth Risk Behavior Surveillance System data can be found <a href="https://chronicdata.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Youth-Risk/vba9-s8jp">here.</a></h4>
+  
   <div class="row">
     <div class="column2" style="position: relative; max-height:6vw; min-height:30px">
       <div id="slider_div">
@@ -17,21 +18,26 @@
         </div>   
       </div> 
     </div>
-    <div class="dropdown" style="position:absolute; z-index:100; margin-left:78%">
+
+    <div class="row" style="margin-left:50%">
+      <!-- tooltip -->
+      <div class="column3" style="margin-top:120%; width:4%; margin-left:900%;display:block; z-index:200">
+          <div class="tooltip2" style="display:block"><span><i class="fa fa-info-circle" style="font-size:24px"></i></span>
+            <span class="tooltiptext" style="margin-left:-10000%">The correlating factors are shown by county on a scale
+            from blah balh to blah blah. These factors are median household income in dollars, unemployment rate as a fration,
+            dfgpiogf</span>
+          </div>
+      </div>
+   
+    <div class="dropdown" style="position:absolute; z-index:100; margin-left:0%">
       <div class="row">
-        <div class="column2" style="width:150%">
+        <div class="column2" style="width:200%">
             <button class="dropbtn">Change Factor &#9660;</button>
         </div>
+
       </div>
-      <!-- <div class="column3" style="margin-top:13%; margin-left:4%">
-          <div class="tooltip">Hover over me
-            <span class="tooltiptext">Tooltip text</span>
-          </div>
-      </div> -->
-      
-      
-        
-        <div id= "radio_options" class="dropdown-content">
+
+        <div id= "radio_options" class="dropdown-content" style="margin-left:200%; width:110%; position:absolute">
             <input type="radio" name="dem_radio" value="income" id="income_check" checked>Median Income
               <label class="dem_option" for="income_check"></label>
             <br>
@@ -53,7 +59,7 @@
         <h2 class="title bubbleTitle" style="margin-top:10%; position:absolute" id="pageTitle"></h2>
       </div>  
   </div>
-
+</div>
     
   <div class="row">
       <div class="column1" style="position: sticky; margin-top:10px;">
@@ -61,7 +67,7 @@
         <svg id="maps" style="max-height:44vw; min-height:200px"></svg>
         <div style="margin-top:-10%" id="map-legend"></div>
       </div>
-      <div class="column3" style="position:sticky; width:100%; margin-left:3%">
+      <div class="column3" style="position:sticky; width:100%; margin-left:3%;">
           <svg id="bubbles" style="height:1250px; width:500px"></svg>
       </div>
     </div>

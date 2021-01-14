@@ -177,7 +177,7 @@ h2.title {
   }
   .column3 {
     float: left;
-    margin-top:-22%;
+    margin-top:-20.5%;
   }
 
  .column2 {
@@ -188,7 +188,6 @@ h2.title {
     background-color: white;
     /*border: 1px solid #b3b2b2;*/
     height:auto;
-    
     max-height:70%;
     width: 26%;
   } 
@@ -498,6 +497,34 @@ h2.title {
 }
 
 .tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+  
+/*hover over info for info icon*/
+
+.tooltip2 {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip2 .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #424242;
+  padding: 15px 0;
+  font-size:12px;
+  font-family: 'Cantarell', sans-serif;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip2:hover .tooltiptext {
   visibility: visible;
 }
   
