@@ -46,24 +46,25 @@ function ready(error, us) {
     
         dem = $("input[name='dem_radio']:checked").val();
         if (dem == 'unemp') { 
-            $(".tooltiptext").text("County-level adult unemployment rate")
+            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and county’s adult unemployment rate; size of bubbles reflects county population")
             $(".dropbtn").html("Unemployment Rate &#9660;") 
         }
         else if (dem == 'income') { 
-            $(".tooltiptext").text("County-level median income")
+            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and county’s median income; size of bubbles reflects county population
+")
             $(".dropbtn").html("Median Income &#9660;")
         }
         else if (dem == 'cpr') { 
-            $(".tooltiptext").text("County-level childhood poverty rate")
+            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and county’s childhood poverty rate; size of bubbles reflects county population")
             $(".dropbtn").html("Childhood Poverty Rate &#9660") }
         else if (dem == 'smoke') { 
-            $(".tooltiptext").text("Percent of county that smokes")
+            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and the % of a county that smokes; size of bubbles reflects county population")
             $(".dropbtn").html("Smoking &#9660") }
         else if (dem == 'exer') {
-            $(".tooltiptext").text("Percent of county with easy access to exercise opportunities")
+            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and the % of a county with easy access to exercise opportunities; size of bubbles reflects county population")
             $(".dropbtn").html("Exercise Opportunities &#9660") }
         else if (dem == 'drink') { 
-            $(".tooltiptext").text("County-level binge drinking rates (consumption of 5+ alcoholic drinks on at least one occasion for the past 3 months")
+            $(".tooltiptext").text("The bubble graph below depicts the relationship between the % obese in a county and the % of a county that drinks heavily (consumed 5+ alcoholic drinks on at least one occasion for the past 3 months); size of bubbles reflects county population")
             $(".dropbtn").html("Excessive Drinking &#9660") }
 
         var val = document.getElementById("myRange").value;
