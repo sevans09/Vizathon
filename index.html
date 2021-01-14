@@ -169,20 +169,32 @@ var years = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "20
 var selected_fips = null;
 var selected_state = null;
 
+// var quantize = d3.scaleQuantize()
+//       .domain([10, 60])
+//       .range(d3.range(5).map(function(i) { 
+//         if (i == 0)
+//               return "#9adbb5";
+//           else if (i == 1)
+//               return "rgb(205, 235, 178)";
+//           else if (i == 2)
+//               return "#F6F5AE";
+//           else if (i == 3)
+//               return "rgb(253, 223, 158)";
+//           else
+//               return "rgb(211, 85, 65)";
+//       }))
+
+var colors = ["#b6e060", "#f5ea6e", "#fac55a", "#FF8E15", "#FF0D0D"];
 var quantize = d3.scaleQuantize()
       .domain([10, 60])
       .range(d3.range(5).map(function(i) { 
-        if (i == 0)
-              return "#9adbb5";
-          else if (i == 1)
-              return "rgb(205, 235, 178)";
-          else if (i == 2)
-              return "#F6F5AE";
-          else if (i == 3)
-              return "rgb(253, 223, 158)";
-          else
-              return "rgb(211, 85, 65)";
+        return colors[i];
       }))
+
+// var quantize = d3.scaleLinear()
+//     .domain([10, 60])
+//     .range(["#69B34C", "#FF0D0D"])
+//     .interpolate(d3.interpolateHcl);
 
 var projection = d3.geoAlbersUsa()
     .scale(width)
@@ -209,8 +221,9 @@ svg.call(tip)
 
 var ordinal = d3.scaleOrdinal()
   .domain(["< 20%", "20%", "30%", "40%", "50% >="])
-  .range(["rgb(154,219,181)", "rgb(205, 235, 178)", "rgb(246,245,174)", 
-          "rgb(253, 223, 158)", "rgb(211, 85, 65)"]);
+  // .range(["rgb(154,219,181)", "rgb(205, 235, 178)", "rgb(246,245,174)", 
+  //         "rgb(253, 223, 158)", "rgb(211, 85, 65)"]);
+  .range(colors);
 
 var legend = d3.select("#map-legend").append("svg");
 
@@ -227,9 +240,9 @@ var move_legend = d3.legendColor()
 legend.select(".legend")
   .call(move_legend)
 
-legend.selectAll("rect")
-  .on("mouseover", highlight_move)
-  .on("mouseout", unhighlight)
+// legend.selectAll("rect")
+//   .on("mouseover", highlight_move)
+//   .on("mouseout", unhighlight)
 
 d3.queue()
     .defer(d3.json, "https://raw.githubusercontent.com/sevans09/Vizathon/main/us.json?token=AKKXA7SAJLELQT4KYMOA3B3AA4EAG")
