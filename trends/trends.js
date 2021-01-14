@@ -172,7 +172,7 @@ function make_x_axis(dem) {
   bubbles.selectAll(".axis").remove();
 
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
-  var width = $("#bubbles").width() * 3;
+  var width = $("#bubbles").width() * 1.5;
   var height = $("#bubbles").height() / 2.5;
 
   pos = $("#bubbles").position().top;
@@ -185,7 +185,7 @@ function make_x_axis(dem) {
 
   bubbles.append("g")
     .attr("class", "y axis")
-    .attr("transform", "translate(" + width/6 + "," + (height/2)  + ")")
+    .attr("transform", "translate(" + width/3 + "," + (height/2)  + ")")
     .call(yAxis);
 }
 
@@ -195,7 +195,7 @@ function update_demographic(dem, val) {
   var t = d3.transition()
         .duration(750);
 
-  var width = $("#bubbles").width() * 3
+  var width = $("#bubbles").width() * 1.5
   var height = $("#bubbles").height() / 2.5
 
   var bubbles = d3.select(".bubble_svg")
@@ -231,7 +231,7 @@ function update_demographic(dem, val) {
     .transition(t)
       .attr("cy", function(d) { return x(get_d_x(dem, d))})
       .attr("cx", function(d) { return y_dict.get(d.fips)})
-      .attr("transform", "translate(" + width/6 + "," + height/2 + ")")
+      .attr("transform", "translate(" + width/3 + "," + height/2 + ")")
 
   make_x_axis(dem);
 
@@ -247,8 +247,8 @@ function make_bubbles_rep(should_clear, val, dem) {
     d3.selectAll("circle").remove();
   }
   var margin = {top: 50, right: 100, bottom: 50, left: 50};
-  var width = $("#bubbles").width() * 3
-  var height = $("#bubbles").height() / 2.5
+  var width = $("#bubbles").width() * 1.5;
+  var height = $("#bubbles").height() / 2.5;
 
   pos = $("#bubbles").position().top;
 
@@ -318,7 +318,7 @@ function make_bubbles_rep(should_clear, val, dem) {
       // .style("opacity", function(d) {
         // return ((d.y + height/2) <= d.r || (d.y + height/2) >= (height - d.r)) ?  0 : 0.75})
       .style("opacity", 0.75)
-      .attr("transform", "translate(" + width/6 + "," + height/2 + ")")
+      .attr("transform", "translate(" + width/3 + "," + height/2 + ")")
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
       // .on('mouseover', function(d) {handleHover(d.fips);  tip.show })
