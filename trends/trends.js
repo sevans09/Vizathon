@@ -6,75 +6,54 @@ var min_vote = 0;
 var max_vote = 1;
 var min_unemp = 0;
 var max_unemp = .26;
+var min_cpr = 0;
+var max_cpr = 55;
 
 var min_max = {
   "income": {'min': min_income, 'max': max_income},
   "pop"   : {'min': min_pop, 'max': max_pop},
-  "vote"  : {'min': min_vote, 'max': max_vote},
-  "unemp" : {'min': min_unemp, 'max': max_unemp}
+  "unemp" : {'min': min_unemp, 'max': max_unemp},
+  "cpr"   : {'min': min_cpr, 'max': max_cpr}
 }
 
 var dem_title = {
   "income": "Median Income",
   "vote"  : "% GOP Vote 2016",
-  "unemp" : "Unemployment Rate"
+  "unemp" : "Unemployment Rate",
+  "cpr"   : "Childhood Poverty Rate"
 }
 
 var dem_label = {
   "income": "Income: $",
   "vote"  : "% GOP Vote: ",
-  "unemp" : "Unemployment"
+  "unemp" : "Unemployment",
+  "cpr"   : "Childhood Poverty Rate"
 }
+
 
 var dem_pos = {
   "income": income_pos,
   "vote"  : pos_vote,
-  "unemp" : unemp_pos
+  "unemp" : unemp_pos,
+  "cpr"   : cpr_pos
 }
 
-var quantize = d3.scaleQuantize()
-    .domain([0, 4])
-    .range(d3.range(5).map(function(i) { 
-        if (i == 0)
-            return "#9adbb5";
-        else if (i == 1)
-            return "rgb(205, 235, 178)";
-        else if (i == 2)
-            return "#F6F5AE";
-        else if (i == 3)
-            return "rgb(253, 223, 158)";
-        else
-            return "rgb(211, 85, 65)";
-    }))
+// console.log(dem_pos["cpr"]);
 
-  // var move_dict = d3.map();
-  // var val = document.getElementById("myRange").value;
-  // // create different move dict depending on the slider val
-  // move_dict = d3.map();
-  // if (val == 1) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 2) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 3) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 4) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 5) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 6) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 7) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 8) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 9) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 10) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  
-var sab_dict = d3.map();
-
-var pop_dict = d3.map()
+var pop_dict = d3.map();
 dem_data.forEach( function(d){ 
   pop_dict.set( d.fips, d.pop_2019);
 });
 
-var unemp_dict = d3.map()
+var unemp_dict = d3.map();
 unemp_data.forEach( function(d) {
   unemp_dict.set(d.id, d.rate);
 });
 
-
+var childpov_dict = d3.map();
+data_2020.forEach(function (d) {
+  childpov_dict.set(d.FIPS, d.childhood_poverty_rate);
+})
 
 function get_rad_range(width) {
   if (width >= 900) {
@@ -99,7 +78,10 @@ function get_x_value(dem, data) {
   else if (dem == "unemp") {
     return percentFormat(data.unemp);
   }
-  return (dem == "vote") ? percentFormat(data.vote) : data.cases;
+  else if (dem == "cpr") {
+    return percentFormat(data.cpr);
+  }
+  // return (dem == "vote") ? percentFormat(data.vote) : data.cases;
 }
 
 function get_node_x(dem, node) {
@@ -108,7 +90,9 @@ function get_node_x(dem, node) {
     }
     else if (dem == "unemp")
       return node.unemp
-    return (dem == "vote") ? node.per_gop : node.cpc
+    else if (dem == "cpr")
+      return node.cpr
+    // return (dem == "vote") ? node.per_gop : node.cpc
 }
 
 function get_d_x(dem, node) {
@@ -118,7 +102,10 @@ function get_d_x(dem, node) {
     else if (dem == "unemp") {
       return node.unemp
     }
-    return (dem == "vote") ? node.vote : node.cpc
+    else if (dem == "cpr") {
+      return node.cpr
+    }
+    // return (dem == "vote") ? node.vote : node.cpc
 }
 
 
@@ -144,6 +131,7 @@ function make_x_axis(dem) {
 
   yAxisTitle
     .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
+    // .attr("x", width)
     .attr("y", ( height/2) - yAxisTitle.node().getBBox().height - height/5)
 
   bubbles.append("g")
@@ -153,6 +141,7 @@ function make_x_axis(dem) {
 }
 
 function update_demographic(dem, val) {
+  console.log(dem);
   var margin = {top: 300, right: 250, bottom: 50, left: 50};
   var t = d3.transition()
         .duration(750);
@@ -183,6 +172,7 @@ function update_demographic(dem, val) {
   var y_dict = d3.map();
   y_pos = dem_pos[dem];
   y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
+  // console.log(y_dict);
 
   var circle = bubbles.selectAll("circle")
     .attr("x", function(d) { return x(get_d_x(dem, d))})
@@ -194,11 +184,16 @@ function update_demographic(dem, val) {
       .attr("cx", function(d) { return y_dict.get(d.fips)})
       .attr("transform", "translate(0," + height/2 + ")")
 
-  make_x_axis(dem)
+  make_x_axis(dem);
+
+  if (selected_fips != null)
+    highlight_single(selected_fips);
+  
 }
 
 // to be used with swapmap to replace map with bubbles
 function make_bubbles_rep(should_clear, val, dem) {
+  console.log("making bubbles", should_clear);
   if (should_clear == true) {
     d3.selectAll("circle").remove();
   }
@@ -240,6 +235,7 @@ function make_bubbles_rep(should_clear, val, dem) {
   var y_dict = d3.map();
   y_pos = dem_pos[dem]
   y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
+  console.log(y_dict);
 
   //add education metric
   var nodes = data.map(function(node, index) {
@@ -250,8 +246,8 @@ function make_bubbles_rep(should_clear, val, dem) {
         income: node.median_income,
         county: node.county,
         sab: node.sab,
-        vote: node.per_gop,
         unemp: unemp_dict.get(node.fips),
+        cpr: childpov_dict.get(node.fips),
         x: x(get_node_x(dem, node)),
         fx: x(get_node_x(dem, node)),
         r: radquantize(node.pop_2019),
@@ -260,7 +256,7 @@ function make_bubbles_rep(should_clear, val, dem) {
       };
     });
 
-    bubbles.selectAll("circle")
+    var circle = bubbles.selectAll("circle")
       .data(nodes)
       .enter().append("circle")
       .style("fill", function(d) { return quantize(move_dict.get(d.fips)); })
@@ -269,11 +265,27 @@ function make_bubbles_rep(should_clear, val, dem) {
       .attr("r", function(d) { return d.r} )
       .style("opacity", function(d) {
         return ((d.y + height/2) <= d.r || (d.y + height/2) >= (height - d.r)) ?  0 : 0.75})
-      .attr("transform", "translate(0," + height/2 + ")")
+      .attr("transform", "translate(0," + margin.top + (height / 2) + ")")
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
       // .on('mouseover', function(d) {handleHover(d.fips);  tip.show })
       .on('click', function(d) { handleClick(d.fips) })
+
+    var simulation = d3.forceSimulation(nodes)
+    .force("x", d3.forceX(function(d) { return x(d.cpr); }).strength(1))
+    .force("y", d3.forceY(margin.top + (height / 2)))
+    .force("collide", d3.forceCollide().radius(function(d){ return d.r}))
+    .force("manyBody", d3.forceManyBody().strength(-1))
+
+    for (var i = 500 - 1; i >= 0; i--) {
+      simulation.tick()
+    }
+    pos_dict = [];
+    circle._groups[0].forEach( function(d){ 
+      pos_dict.push(d.__data__)
+    });
+    console.log(JSON.stringify(pos_dict, null, 4));
+
 
     make_x_axis(dem)
       
