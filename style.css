@@ -476,4 +476,32 @@ h2.title {
 .dropdown:hover .dropbtn {
   background-color: #f1f1f1;
 }
+
+/*hover over info for info icon*/
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: ;
+  border: 2px solid black;
+  padding: 5px 0;
+  font: 'Ubuntu', sans-serif;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
   
