@@ -86,4 +86,4 @@ function highlight_single(county) {
   //     .style("stroke", function(d) {
   //       return (county == d.fips) ? "black" : "transparent"
   //     })
-  }
+  // }
