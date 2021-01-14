@@ -165,25 +165,8 @@ data_2018.forEach( function(d){ state_fips_dict.set( d.FIPS, d.State) });
 
 
 var years = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
-
 var selected_fips = null;
-var selected_state = null;
-
-// var quantize = d3.scaleQuantize()
-//       .domain([10, 60])
-//       .range(d3.range(5).map(function(i) { 
-//         if (i == 0)
-//               return "#9adbb5";
-//           else if (i == 1)
-//               return "rgb(205, 235, 178)";
-//           else if (i == 2)
-//               return "#F6F5AE";
-//           else if (i == 3)
-//               return "rgb(253, 223, 158)";
-//           else
-//               return "rgb(211, 85, 65)";
-//       }))
-
+// var old_colors = ["#9adbb5", "rgb(205, 235, 178)", "#F6F5AE", "rgb(253, 223, 158)", "rgb(211, 85, 65)"];
 var colors = ["#b6e060", "#f5ea6e", "#fac55a", "#FF8E15", "#FF0D0D"];
 var quantize = d3.scaleQuantize()
       .domain([10, 60])
