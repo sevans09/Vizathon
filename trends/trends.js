@@ -168,6 +168,7 @@ function get_d_x(dem, node) {
 
 
 function make_x_axis(dem) {
+  console.log("making x axis");
   var bubbles = d3.select(".bubble_svg")
   bubbles.selectAll(".axis").remove();
 
@@ -182,16 +183,18 @@ function make_x_axis(dem) {
   .range( [margin.left, width - margin.right] );
 
   var yAxis;
-  if (dem !== "income")
+  if (dem !== "income" && dem !== "unemp")
     yAxis = d3.axisRight(y).tickFormat(function(d){
     return d.toString() + "%"});
-  else if (dem == "unemp")      
+  else if (dem === "unemp") {
     yAxis = d3.axisRight(y).tickFormat(function(d){
-    return d.toString()  + "%"});
-
-  else 
+      console.log(d);
+      return (d*100).toFixed().toString()  + "%"});
+  }     
+  else {
     yAxis = d3.axisRight(y).tickFormat(function(d){
       return "$" + numberWithCommas(d);});
+    }
 
   bubbles.append("g")
     .attr("class", "y axis")
