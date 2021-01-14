@@ -46,24 +46,24 @@ function ready(error, us) {
     
         dem = $("input[name='dem_radio']:checked").val();
         if (dem == 'unemp') { 
-            $(".tooltiptext").text("This depicts unemployment rate of adult Americans as a fraction. ")
+            $(".tooltiptext").text("County-level adult unemployment rate")
             $(".dropbtn").html("Unemployment Rate &#9660;") 
         }
         else if (dem == 'income') { 
-            
+            $(".tooltiptext").text("County-level median income")
             $(".dropbtn").html("Median Income &#9660;")
         }
         else if (dem == 'cpr') { 
-            
+            $(".tooltiptext").text("County-level childhood poverty rate")
             $(".dropbtn").html("Childhood Poverty Rate &#9660") }
         else if (dem == 'smoke') { 
-            
+            $(".tooltiptext").text("Percent of county that smokes")
             $(".dropbtn").html("Smoking &#9660") }
         else if (dem == 'exer') {
-            
+            $(".tooltiptext").text("Percent of county with easy access to exercise opportunities")
             $(".dropbtn").html("Exercise Opportunities &#9660") }
         else if (dem == 'drink') { 
-            
+            $(".tooltiptext").text("County-level binge drinking rates (consumption of 5+ alcoholic drinks on at least one occasion for the past 3 months")
             $(".dropbtn").html("Excessive Drinking &#9660") }
 
         var val = document.getElementById("myRange").value;
