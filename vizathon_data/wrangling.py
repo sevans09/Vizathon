@@ -26,12 +26,12 @@ def convert_fips(x):
         return x
 
 years = [str(num) for num in range(2011, 2021, 1)]
-cols_og = ['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '% Children in Poverty']
-cols_2020 = ['FIPS', 'County', 'State', '% Adults with Obesity', '% Smokers', '% Unemployed', '% Children in Poverty']
-og_dict = {'% Obese': 'obesity_rate', '% Adults with Obesity': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate'}
+cols_og = ['FIPS', 'County', 'State', '% Obese', '% Smokers', '% unemployed', '% Children in Poverty', '% With Access', '% Excessive Drinking']
+cols_2020 = ['FIPS', 'County', 'State', '% Adults with Obesity', '% Smokers', '% Unemployed', '% Children in Poverty', '% With Access to Exercise Opportunities', '% Excessive Drinking']
+og_dict = {'% Obese': 'obesity_rate', '% Adults with Obesity': 'obesity_rate', '% Smokers': 'smoking_rate', '% unemployed': 'unemployment_rate', '% Unemployed': 'unemployment_rate', '% Children in Poverty': 'childhood_poverty_rate', '% With Access': 'exercise', '% With Access to Exercise Opportunities': 'exercise', '% Excessive Drinking': 'drinking'}
 
-max_obesity = 0
-min_obesity = 100
+max_cpr = 0
+min_cpr = 100
 
 for year in years:
     print("getting", year, "data...")
@@ -51,16 +51,20 @@ for year in years:
             df.columns = new_header 
             cols = cols_2020 if year == "2020" else cols_og            
             df.drop(df.columns.difference(cols), 1, inplace=True)
-            orig_df = pd.concat([orig_df, df], ignore_index=True)
+            try:
+                orig_df = pd.concat([orig_df, df], ignore_index=True)
+            except:
+                print(df.columns, fpath)
+                break
 
         # post-processing
-
         orig_df['FIPS'] = orig_df['FIPS'].apply(lambda x: convert_fips(x))
         orig_df.rename(columns=og_dict, inplace=True)
-        if max(orig_df['obesity_rate']) > max_obesity:
-            max_obesity = max(orig_df['obesity_rate']) 
-        if min(orig_df['obesity_rate']) < min_obesity:
-            min_obesity = min(orig_df['obesity_rate'])
+        if year == "2020":
+            if max(orig_df['childhood_poverty_rate']) > max_cpr:
+                max_cpr = max(orig_df['childhood_poverty_rate']) 
+            if min(orig_df['childhood_poverty_rate']) < min_cpr:
+                min_cpr = min(orig_df['childhood_poverty_rate'])
         # print(list(orig_df['obesity_rate']))
         orig_df.drop_duplicates(subset=['FIPS'], keep='last', inplace=True)
         orig_df.reset_index(drop=True, inplace=True)
@@ -71,5 +75,5 @@ for year in years:
         prepend_line("./../jsons/data_" + year + ".json", "data_" + year + " = ")
         # break
     # break
-print(min_obesity, max_obesity)
+print(min_cpr, max_cpr)
         
