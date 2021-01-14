@@ -22,7 +22,6 @@ function highlight_move(move_index) {
   
 function unhighlight() {
     selected_fips = null;
-    console.log("testing");
 
     svg.selectAll(".counties path")
       .transition()
@@ -66,4 +65,26 @@ function highlight_single(county) {
   function handleClick(fips) {
     unhighlight();
     highlight_single(fips);
+  }
+
+
+  function handleHover(county) {
+    unhighlight();
+    svg.selectAll(".counties path")
+      .transition()
+      .duration(500)
+      .style("stroke", function(d) {
+        return county == d.id ? "black" : "transparent"
+      });
+
+    var bubbles = d3.select(".bubble_svg")
+    bubbles.selectAll("circle")
+      .transition()
+      .duration(500)
+      .style("opacity", function(d) {
+        return (county == d.fips) ? 0.75 : 0.2
+      })
+      .style("stroke", function(d) {
+        return (county == d.fips) ? "black" : "transparent"
+      })
   }

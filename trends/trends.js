@@ -144,7 +144,7 @@ function make_x_axis(dem) {
 
   var yAxisTitle = bubbles.append("text")
     .attr("class", "axisTitle")
-    .text(dem_title[dem]);
+    // .text(dem_title[dem] + "%");
 
   yAxisTitle
     .attr("x", width - yAxisTitle.node().getBBox().width - width/4.5)
@@ -246,19 +246,6 @@ function make_bubbles_rep(should_clear, val, dem) {
   var y_dict = d3.map();
   y_pos = dem_pos[dem]
   y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
-  // var move_dict = d3.map();
-  // var val = document.getElementById("myRange").value;
-
-  // if (val == 0) { data_2011.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 1) { data_2012.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 2) { data_2013.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 3) { data_2014.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 4) { data_2015.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 5) { data_2016.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 6) { data_2017.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 7) { data_2018.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 8) { data_2019.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
-  // else if (val == 9) { data_2020.forEach( function(d){ move_dict.set( d.FIPS, d.obesity_rate) }); }
 
   //add education metric
   var nodes = data.map(function(node, index) {
@@ -291,6 +278,7 @@ function make_bubbles_rep(should_clear, val, dem) {
       .attr("transform", "translate(0," + height/2 + ")")
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
+      .on('mouseover', function(d) { handleHover(d.fips) })
       .on('click', function(d) { handleClick(d.fips) })
 
     make_x_axis(dem)

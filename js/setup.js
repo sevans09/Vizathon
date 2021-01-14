@@ -51,7 +51,6 @@ function ready(error, us) {
         dem = $("input[name='dem_radio']:checked").val();
         if (dem == 'unemp') { $(".dropbtn").html("Unemployment Rate &#9660;") }
         if (dem == 'income') { $(".dropbtn").html("Median Income &#9660;") }
-        if (dem == 'smoking') { $(".dropbtn").html("Smoking Rate &#9660;") }
         if (dem == 'poverty') { $(".dropbtn").html("Childhood Poverty Rate &#9660;") }
         var val = document.getElementById("myRange").value;
         // make_bubbles_rep(true, val, dem)
