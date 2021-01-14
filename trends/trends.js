@@ -242,7 +242,7 @@ function update_demographic(dem, val) {
 
 // to be used with swapmap to replace map with bubbles
 function make_bubbles_rep(should_clear, val, dem) {
-  console.log("making bubbles", should_clear);
+  console.log("making bubbles");
   if (should_clear == true) {
     d3.selectAll("circle").remove();
   }
@@ -284,7 +284,6 @@ function make_bubbles_rep(should_clear, val, dem) {
   var y_dict = d3.map();
   y_pos = dem_pos[dem]
   y_pos.forEach( function(d){ y_dict.set(d.fips, 250 - d.y )});
-  console.log(y_dict);
 
   //add education metric
   var nodes = data.map(function(node, index) {
@@ -325,12 +324,12 @@ function make_bubbles_rep(should_clear, val, dem) {
       .on('click', function(d) { handleClick(d.fips) })
 
     // var simulation = d3.forceSimulation(nodes)
-    // .force("x", d3.forceX(function(d) { return x(d.drinking); }).strength(1))
+    // .force("x", d3.forceX(function(d) { return x(d.exercise); }).strength(1))
     // .force("y", d3.forceY((height/2)).strength(1))
-    // .force("collide", d3.forceCollide().radius(function(d){ return d.r + 0.2}))
-    // .force("manyBody", d3.forceManyBody().strength(-1))
+    // .force("collide", d3.forceCollide().radius(function(d){ return d.r }))
+    // .force("charge", d3.forceManyBody().strength(-2))
 
-    // for (var i = 500 - 1; i >= 0; i--) {
+    // for (var i = 1000 - 1; i >= 0; i--) {
     //   simulation.tick()
     // }
     // pos_dict = [];
